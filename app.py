@@ -3,6 +3,8 @@ import os
 from pathlib import Path
 import pdfplumber
 from docx import Document
+from analyzer.skills import extract_skills
+from analyzer.parser import parse_resume
 
 # -------------------------------
 # Project Configuration
@@ -89,10 +91,14 @@ def upload():
     if filename.endswith(".pdf"):
 
         resume_text = extract_pdf_text(filepath)
+        skills = extract_skills(resume_text)
+        resume_data = parse_resume(resume_text)
 
     elif filename.endswith(".docx"):
 
         resume_text = extract_docx_text(filepath)
+        skills = extract_skills(resume_text)
+        resume_data = parse_resume(resume_text)
 
     else:
 
@@ -100,7 +106,9 @@ def upload():
 
     return render_template(
         "results.html",
-        resume_text=resume_text
+        resume_text=resume_text,
+        skills=skills,
+        resume_data=resume_data
     )
 
 
