@@ -27,9 +27,23 @@
             <p>✅ Recruiter-Friendly Feedback</p>
         </div>
 
-        <button>
-            🚀 Analyze My Resume
-        </button>
+        <form action="/upload"
+      method="POST"
+      enctype="multipart/form-data">
+
+    <input
+        type="file"
+        name="resume"
+        accept=".pdf,.doc,.docx"
+        required>
+
+    <br><br>
+
+    <button type="submit">
+        🚀 Analyze My Resume
+    </button>
+
+</form>
 
     </div>
 
