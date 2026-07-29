@@ -47,6 +47,25 @@ border-radius:10px;
 
 <p><strong>Phone:</strong> {{ resume_data.phone }}</p>
 <h2>Detected Skills</h2>
+<h3>Education</h3>
+
+<p>{{ resume_data.education }}</p>
+
+<h3>Experience</h3>
+
+<p>{{ resume_data.experience }}</p>
+
+<h3>Projects</h3>
+
+<ul>
+
+{% for project in resume_data.projects %}
+
+<li>{{ project }}</li>
+
+{% endfor %}
+
+</ul>
 
 <ul>
     {% for skill in skills %}
