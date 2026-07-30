@@ -1,109 +1,176 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-
-<title>Resume Text</title>
-
-<style>
-
-body{
-
-font-family:Arial;
-
-padding:40px;
-
-background:#111827;
-
-color:white;
-
-}
-
-pre{
-
-white-space:pre-wrap;
-
-background:#1f2937;
-
-padding:20px;
-
-border-radius:10px;
-
-}
-
-</style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Resume Analyzer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/results.css') }}">
 </head>
 
 <body>
 
-<h1>📄 Extracted Resume</h1>
+<div class="container">
 
-<h2>Candidate Information</h2>
+    <h1>🤖 AI Resume Analyzer</h1>
+    <p>Resume Analysis Report</p>
 
-<p><strong>Name:</strong> {{ resume_data.name }}</p>
+    <!-- ATS Score -->
+    <div class="card">
+        <div class="section">
 
-<p><strong>Email:</strong> {{ resume_data.email }}</p>
+    <h2>📊 ATS Score</h2>
 
-<p><strong>Phone:</strong> {{ resume_data.phone }}</p>
-<h2>Detected Skills</h2>
-<h2>ATS Score</h2>
+    <div class="score">
 
-<h1>{{ ats_score }}/100</h1>
-<h2>Missing Skills</h2>
+        {{ ats_score }}/100
+
+    </div>
+
+    <div class="progress">
+
+    <div class="progress-bar"
+        style="width: {{ ats_score }}%;">
+
+    </div>
+
+        </div>
+
+        </div>
+
+        {% if ats_score >= 90 %}
+            <p style="color:lime;">🟢 Excellent Resume</p>
+
+        {% elif ats_score >= 70 %}
+            <p style="color:gold;">🟡 Good Resume</p>
+
+        {% elif ats_score >= 50 %}
+            <p style="color:orange;">🟠 Average Resume</p>
+
+        {% else %}
+            <p style="color:red;">🔴 Needs Improvement</p>
+
+        {% endif %}
+    </div>
+
+    <!-- Candidate Information -->
+    <div class="section info">
+
+    <h2>👤 Candidate Information</h2>
+
+    <p><strong>Name:</strong> {{ resume_data.name }}</p>
+
+    <p><strong>Email:</strong> {{ resume_data.email }}</p>
+
+    <p><strong>Phone:</strong> {{ resume_data.phone }}</p>
+
+    </div>
+
+    <!-- Skills -->
+    <div class="card">
+
+        <h2>🛠 Detected Skills</h2>
+
+        <div class="section">
+
+        <h2>🛠 Detected Skills</h2>
+
+        <div class="skills">
+
+        {% for skill in skills %}
+        <span class="badge">{{ skill }}</span>
+            {% endfor %}
+
+        </div>
+
+        </div>
+
+    </div>
+
+    <!-- Missing Skills -->
+    <<div class="section">
+
+<h2>❌ Missing Skills</h2>
+
+<div class="skills">
+
+{% for skill in missing_skills %}
+<span class="badge missing">{{ skill }}</span>
+{% endfor %}
+
+</div>
+
+</div>
+
+    <!-- AI Suggestions -->
+    <<div class="section suggestions">
 
 <h2>💡 AI Suggestions</h2>
 
 <ul>
+
 {% for suggestion in suggestions %}
-    <li>{{ suggestion }}</li>
-{% endfor %}
-</ul>
 
-<ul>
-
-{% for skill in missing_skills %}
-
-<li>{{ skill }}</li>
-
-{% endfor %}
-
-</ul>
-<h3>Education</h3>
-
-<p>{{ resume_data.education }}</p>
-
-<h3>Experience</h3>
-
-<p>{{ resume_data.experience }}</p>
-
-<h3>Projects</h3>
-
-<ul>
-
-{% for project in resume_data.projects %}
-
-<li>{{ project }}</li>
+<li>{{ suggestion }}</li>
 
 {% endfor %}
 
 </ul>
 
-<ul>
-    {% for skill in skills %}
-        <li>{{ skill }}</li>
-    {% endfor %}
-</ul>
+</div>
 
-<pre>
+    <!-- Education -->
+    <div class="card">
+
+        <h2>🎓 Education</h2>
+
+        <p>{{ resume_data.education }}</p>
+
+    </div>
+
+    <!-- Experience -->
+    <div class="card">
+
+        <h2>💼 Experience</h2>
+
+        <p>{{ resume_data.experience }}</p>
+
+    </div>
+
+    <!-- Projects -->
+    <div class="card">
+
+        <h2>🚀 Projects</h2>
+
+        <ul>
+            {% for project in resume_data.projects %}
+                <li>{{ project }}</li>
+            {% endfor %}
+        </ul>
+
+    </div>
+
+    <!-- Resume Preview -->
+    <div class="section">
+
+<h2>📄 Resume Preview</h2>
+
+<div class="resume-preview">
 
 {{ resume_text }}
 
-</pre>
+</div>
 
-<br>
+</div>
 
-<a href="/">⬅ Upload Another Resume</a>
+    <br>
+
+    <a class="upload-btn" href="/">⬅ Upload Another Resume</a>
+    <label>Paste Job Description</label>
+
+
+
+</div>
 
 </body>
 
