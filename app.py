@@ -6,6 +6,7 @@ from docx import Document
 from analyzer.skills import extract_skills
 from analyzer.parser import parse_resume
 from analyzer.ats import calculate_ats_score
+from analyzer.suggestions import generate_suggestions
 
 # -------------------------------
 # Project Configuration
@@ -94,6 +95,7 @@ def upload():
         resume_text = extract_pdf_text(filepath)
         skills = extract_skills(resume_text)
         score, missing_skills = calculate_ats_score(skills)
+        suggestions = generate_suggestions(score,missing_skills)
         resume_data = parse_resume(resume_text)
 
     elif filename.endswith(".docx"):
@@ -101,6 +103,7 @@ def upload():
         resume_text = extract_docx_text(filepath)
         skills = extract_skills(resume_text)
         score, missing_skills = calculate_ats_score(skills)
+        suggestions = generate_suggestions(score,missing_skills)
         resume_data = parse_resume(resume_text)
 
     else:
@@ -113,7 +116,8 @@ def upload():
         skills=skills,
         resume_data=resume_data,
         ats_score=score,
-        missing_skills=missing_skills
+        missing_skills=missing_skills,
+        suggestions=suggestions
     )
 
 

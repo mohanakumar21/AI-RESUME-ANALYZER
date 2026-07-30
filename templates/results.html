@@ -52,6 +52,14 @@ border-radius:10px;
 <h1>{{ ats_score }}/100</h1>
 <h2>Missing Skills</h2>
 
+<h2>💡 AI Suggestions</h2>
+
+<ul>
+{% for suggestion in suggestions %}
+    <li>{{ suggestion }}</li>
+{% endfor %}
+</ul>
+
 <ul>
 
 {% for skill in missing_skills %}
