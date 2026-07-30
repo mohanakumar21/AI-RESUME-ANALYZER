@@ -5,122 +5,140 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Resume Analyzer</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/results.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/results.css') }}">
 </head>
 
 <body>
 
 <div class="container">
 
-    <h1>🤖 AI Resume Analyzer</h1>
-    <p>Resume Analysis Report</p>
+    <div class="title">
+        <h1>🤖 AI Resume Analyzer</h1>
+        <p>Resume Analysis Report</p>
+    </div>
 
     <!-- ATS Score -->
-    <div class="card">
-        <div class="section">
 
-    <h2>📊 ATS Score</h2>
+    <div class="section">
 
-    <div class="score">
+        <h2>📊 ATS Score</h2>
 
-        {{ ats_score }}/100
+        <div class="score">
 
-    </div>
-
-    <div class="progress">
-
-    <div class="progress-bar"
-        style="width: {{ ats_score }}%;">
-
-    </div>
+            {{ ats_score }}/100
 
         </div>
+
+        <div class="progress">
+
+            <div class="progress-bar"
+                 style="width: {{ ats_score }}%;">
+
+            </div>
 
         </div>
 
         {% if ats_score >= 90 %}
+
             <p style="color:lime;">🟢 Excellent Resume</p>
 
         {% elif ats_score >= 70 %}
+
             <p style="color:gold;">🟡 Good Resume</p>
 
         {% elif ats_score >= 50 %}
+
             <p style="color:orange;">🟠 Average Resume</p>
 
         {% else %}
+
             <p style="color:red;">🔴 Needs Improvement</p>
 
         {% endif %}
+
     </div>
 
     <!-- Candidate Information -->
+
     <div class="section info">
 
-    <h2>👤 Candidate Information</h2>
+        <h2>👤 Candidate Information</h2>
 
-    <p><strong>Name:</strong> {{ resume_data.name }}</p>
+        <p><strong>Name:</strong> {{ resume_data.name }}</p>
 
-    <p><strong>Email:</strong> {{ resume_data.email }}</p>
+        <p><strong>Email:</strong> {{ resume_data.email }}</p>
 
-    <p><strong>Phone:</strong> {{ resume_data.phone }}</p>
+        <p><strong>Phone:</strong> {{ resume_data.phone }}</p>
 
     </div>
 
     <!-- Skills -->
-    <div class="card">
 
-        <h2>🛠 Detected Skills</h2>
-
-        <div class="section">
+    <div class="section">
 
         <h2>🛠 Detected Skills</h2>
 
         <div class="skills">
 
-        {% for skill in skills %}
-        <span class="badge">{{ skill }}</span>
-            {% endfor %}
+            {% for skill in skills %}
 
-        </div>
+                <span class="badge">{{ skill }}</span>
+
+            {% endfor %}
 
         </div>
 
     </div>
 
     <!-- Missing Skills -->
-    <<div class="section">
 
-<h2>❌ Missing Skills</h2>
+    <div class="section">
 
-<div class="skills">
+        <h2>❌ Missing Skills</h2>
 
-{% for skill in missing_skills %}
-<span class="badge missing">{{ skill }}</span>
-{% endfor %}
+        <div class="skills">
 
-</div>
+            {% if missing_skills %}
 
-</div>
+                {% for skill in missing_skills %}
+
+                    <span class="badge missing">{{ skill }}</span>
+
+                {% endfor %}
+
+            {% else %}
+
+                <p>No Missing Skills 🎉</p>
+
+            {% endif %}
+
+        </div>
+
+    </div>
 
     <!-- AI Suggestions -->
-    <<div class="section suggestions">
 
-<h2>💡 AI Suggestions</h2>
+    <div class="section suggestions">
 
-<ul>
+        <h2>💡 AI Suggestions</h2>
 
-{% for suggestion in suggestions %}
+        <ul>
 
-<li>{{ suggestion }}</li>
+            {% for suggestion in suggestions %}
 
-{% endfor %}
+                <li>{{ suggestion }}</li>
 
-</ul>
+            {% endfor %}
 
-</div>
+        </ul>
+
+    </div>
 
     <!-- Education -->
-    <div class="card">
+
+    <div class="section">
 
         <h2>🎓 Education</h2>
 
@@ -129,7 +147,8 @@
     </div>
 
     <!-- Experience -->
-    <div class="card">
+
+    <div class="section">
 
         <h2>💼 Experience</h2>
 
@@ -137,38 +156,114 @@
 
     </div>
 
+    <!-- Job Match Score -->
+
+    <div class="section">
+
+        <h2>🎯 Job Match Score</h2>
+
+        <div class="score">
+
+            {{ match_score }}%
+
+        </div>
+
+        <div class="progress">
+
+            <div class="progress-bar"
+                 style="width: {{ match_score }}%;">
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Matching Skills -->
+
+    <div class="section">
+
+        <h2>✅ Matching Skills</h2>
+
+        <div class="skills">
+
+            {% if matched_skills %}
+
+                {% for skill in matched_skills %}
+
+                    <span class="badge">{{ skill }}</span>
+
+                {% endfor %}
+
+            {% else %}
+
+                <p>No matching skills found.</p>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+    <!-- Missing Job Skills -->
+
+    <div class="section">
+
+        <h2>❌ Missing Job Skills</h2>
+
+        <div class="skills">
+
+            {% if missing_job_skills %}
+
+                {% for skill in missing_job_skills %}
+
+                    <span class="badge missing">{{ skill }}</span>
+
+                {% endfor %}
+
+            {% else %}
+
+                <p>No missing job skills.</p>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
     <!-- Projects -->
-    <div class="card">
+
+    <div class="section projects">
 
         <h2>🚀 Projects</h2>
 
         <ul>
+
             {% for project in resume_data.projects %}
+
                 <li>{{ project }}</li>
+
             {% endfor %}
+
         </ul>
 
     </div>
 
     <!-- Resume Preview -->
+
     <div class="section">
 
-<h2>📄 Resume Preview</h2>
+        <h2>📄 Resume Preview</h2>
 
-<div class="resume-preview">
+        <pre class="resume-preview">{{ resume_text }}</pre>
 
-{{ resume_text }}
+    </div>
 
-</div>
+    <a href="/" class="upload-btn">
 
-</div>
+        ⬅ Upload Another Resume
 
-    <br>
-
-    <a class="upload-btn" href="/">⬅ Upload Another Resume</a>
-    <label>Paste Job Description</label>
-
-
+    </a>
 
 </div>
 

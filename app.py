@@ -3,10 +3,12 @@ import os
 from pathlib import Path
 import pdfplumber
 from docx import Document
-from analyzer.skills import extract_skills
 from analyzer.parser import parse_resume
 from analyzer.ats import calculate_ats_score
 from analyzer.suggestions import generate_suggestions
+from analyzer.job_match import extract_job_skills, calculate_match
+from analyzer.skills import extract_skills, SKILLS_DATABASE
+
 
 # -------------------------------
 # Project Configuration
@@ -77,6 +79,7 @@ def upload():
         return "No file uploaded."
 
     file = request.files["resume"]
+    job_description = request.form.get("job_description", "")
 
     if file.filename == "":
         return "No file selected."
@@ -92,23 +95,36 @@ def upload():
 
     if filename.endswith(".pdf"):
 
+        # Extract resume text
         resume_text = extract_pdf_text(filepath)
-        skills = extract_skills(resume_text)
-        score, missing_skills = calculate_ats_score(skills)
-        suggestions = generate_suggestions(score,missing_skills)
-        resume_data = parse_resume(resume_text)
 
     elif filename.endswith(".docx"):
 
+        # Extract resume text
         resume_text = extract_docx_text(filepath)
-        skills = extract_skills(resume_text)
-        score, missing_skills = calculate_ats_score(skills)
-        suggestions = generate_suggestions(score,missing_skills)
-        resume_data = parse_resume(resume_text)
 
     else:
 
-        resume_text = "Unsupported File Format"
+        return "Unsupported File Format"
+
+    # ---------------- Resume Analysis ----------------
+
+    skills = extract_skills(resume_text)
+
+    resume_data = parse_resume(resume_text)
+
+    score, missing_skills = calculate_ats_score(skills)
+
+    suggestions = generate_suggestions(score, missing_skills)
+
+    # ---------------- Job Matching ----------------
+
+    job_skills = extract_skills(job_description)
+
+    match_score, matched_skills, missing_job_skills = calculate_match(
+        skills,
+        job_skills
+    )
 
     return render_template(
         "results.html",
@@ -117,13 +133,16 @@ def upload():
         resume_data=resume_data,
         ats_score=score,
         missing_skills=missing_skills,
-        suggestions=suggestions
+        suggestions=suggestions,
+        job_description=job_description,
+        job_skills=job_skills,
+        match_score=match_score,
+        matched_skills=matched_skills,
+        missing_job_skills=missing_job_skills
     )
-
-
-# -------------------------------
-# Run Application
-# -------------------------------
-
+    # -------------------------------
+    # Run Application
+    # -------------------------------
 if __name__ == "__main__":
+
     app.run(debug=True)
