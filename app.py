@@ -8,6 +8,7 @@ from analyzer.ats import calculate_ats_score
 from analyzer.suggestions import generate_suggestions
 from analyzer.job_match import extract_job_skills, calculate_match
 from analyzer.skills import extract_skills, SKILLS_DATABASE
+from analyzer.ai_feedback import generate_ai_feedback
 
 
 # -------------------------------
@@ -81,6 +82,7 @@ def upload():
     file = request.files["resume"]
     job_description = request.form.get("job_description", "")
 
+
     if file.filename == "":
         return "No file selected."
 
@@ -120,11 +122,16 @@ def upload():
     # ---------------- Job Matching ----------------
 
     job_skills = extract_skills(job_description)
-
     match_score, matched_skills, missing_job_skills = calculate_match(
         skills,
         job_skills
     )
+    ai_feedback = generate_ai_feedback(
+        resume_text,
+        score,
+        missing_skills,
+        match_score
+    )    
 
     return render_template(
         "results.html",
@@ -138,7 +145,8 @@ def upload():
         job_skills=job_skills,
         match_score=match_score,
         matched_skills=matched_skills,
-        missing_job_skills=missing_job_skills
+        missing_job_skills=missing_job_skills,
+        ai_feedback=ai_feedback
     )
     # -------------------------------
     # Run Application
