@@ -1,132 +1,168 @@
 # 🤖 AI Resume Analyzer
 
-An AI-powered Resume Analyzer built using **Python, Flask, HTML, CSS, and JavaScript** that analyzes resumes, detects skills, calculates ATS scores, identifies missing skills, and provides intelligent suggestions to improve resumes for job applications.
-
----
-
-## 📸 Project Preview
-
-### Landing Page
-
-(Add Screenshot Here)
-
-### Resume Analysis Dashboard
-
-(Add Screenshot Here)
+An AI-powered Resume Analyzer that evaluates resumes using ATS (Applicant Tracking System) scoring, skill extraction, job description matching, and AI-generated feedback using Google's Gemini API.
 
 ---
 
 ## 🚀 Features
 
-✅ Upload Resume (.pdf / .docx)
+✅ Upload Resume (PDF & DOCX)
 
-✅ Extract Resume Text
+✅ Resume Parsing
 
-✅ Detect Technical Skills
+✅ ATS Compatibility Score
 
-✅ Extract Candidate Information
-- Name
-- Email
-- Phone
+✅ Resume Skill Extraction
 
-✅ Extract Education
-
-✅ Detect Experience
-
-✅ Extract Projects
-
-✅ ATS Score Calculation
-
-✅ Missing Skills Detection
+✅ Missing Skill Detection
 
 ✅ AI Resume Suggestions
 
-✅ Responsive Dashboard UI
+✅ Job Description Matching
+
+✅ Job Match Score
+
+✅ Matching & Missing Job Skills
+
+✅ AI Resume Review using Google Gemini
+
+✅ Modern Responsive UI
 
 ---
 
-## 🛠️ Tech Stack
+## 📸 Screenshots
 
-### Backend
-- Python
-- Flask
+### Home Page
+<img width="100%" alt="Home Page" src="screenshots/home.png">
+
+### Resume Analysis
+<img width="100%" alt="Results Page" src="screenshots/results.png">
+
+---
+
+## 🛠 Tech Stack
 
 ### Frontend
 - HTML5
 - CSS3
 - JavaScript
 
-### Libraries
+### Backend
+- Python
+- Flask
+
+### AI
+- Google Gemini API
+- Prompt Engineering
+
+### Resume Processing
 - pdfplumber
 - python-docx
-- pathlib
-- re
+- Regular Expressions (Regex)
+
+### Version Control
+- Git
+- GitHub
 
 ---
 
 ## 📂 Project Structure
 
-```
 AI-RESUME-ANALYZER
+
+├── analyzer/
+
+│ ├── parser.py
+
+│ ├── ats.py
+
+│ ├── skills.py
+
+│ ├── suggestions.py
+
+│ ├── job_match.py
+
+│ └── ai_feedback.py
+
 │
-├── analyzer
-│   ├── parser.py
-│   ├── skills.py
-│   ├── ats.py
-│   └── suggestions.py
+
+├── static/
+
+│ └── css/
+
+│ ├── style.css
+
+│ └── results.css
+
 │
-├── static
-│   └── css
-│       └── style.css
+
+├── templates/
+
+│ ├── index.html
+
+│ └── results.html
+
 │
-├── templates
-│   ├── index.html
-│   └── results.html
-│
-├── uploads
-│
+
+├── uploads/
+
 ├── app.py
+
 ├── requirements.txt
+
 └── README.md
-```
 
 ---
 
-## ⚙️ Installation
+## ⚙ Installation
 
-Clone the repository
+### Clone Repository
 
 ```bash
 git clone https://github.com/mohanakumar21/AI-RESUME-ANALYZER.git
 ```
 
-Go to project folder
-
 ```bash
 cd AI-RESUME-ANALYZER
 ```
 
-Create virtual environment
+### Create Virtual Environment
 
 ```bash
 python -m venv venv
 ```
 
-Activate virtual environment
+### Activate Environment
 
-### Windows
+Windows
 
 ```bash
 venv\Scripts\activate
 ```
 
-Install dependencies
+Linux / Mac
+
+```bash
+source venv/bin/activate
+```
+
+### Install Requirements
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Run the project
+### Configure Gemini API
+
+Create an environment variable named
+
+```
+GEMINI_API_KEY
+```
+
+and assign your Google Gemini API key.
+
+### Run the Application
 
 ```bash
 python app.py
@@ -140,33 +176,46 @@ http://127.0.0.1:5000
 
 ---
 
-## 🎯 Current Features
+## 📊 Current Capabilities
 
-| Feature | Status |
-|----------|--------|
-| Resume Upload | ✅ |
-| PDF Parsing | ✅ |
-| DOCX Parsing | ✅ |
-| Skill Detection | ✅ |
-| Candidate Information | ✅ |
-| ATS Score | ✅ |
-| Missing Skills | ✅ |
-| AI Suggestions | ✅ |
-| Beautiful Dashboard | ✅ |
+- Resume Parsing
+- ATS Score Calculation
+- Skill Extraction
+- Missing Skill Detection
+- Resume Suggestions
+- Job Description Analysis
+- Job Match Percentage
+- AI Resume Review
 
 ---
 
-## 📈 Future Improvements
+## 🎯 Future Improvements
 
-- AI Resume Rewriting
-- Resume Summary Generator
-- Job Description Matching
 - Resume Ranking
-- Multiple Resume Comparison
-- GPT-powered Suggestions
-- Export Analysis as PDF
+- Download Analysis Report (PDF)
+- AI Resume Rewrite
+- Resume Comparison
+- Multiple Resume Analysis
+- Dashboard with Analytics
+- User Login System
+- Resume History
 - Resume Templates
-- Dark / Light Mode
+- Deployment on Render
+
+---
+
+## 💡 Learning Outcomes
+
+Through this project I learned:
+
+- Flask Web Development
+- REST-based Application Design
+- Resume Parsing
+- Regular Expressions
+- Prompt Engineering
+- Google Gemini API Integration
+- HTML & CSS UI Design
+- Git & GitHub Workflow
 
 ---
 
@@ -182,8 +231,18 @@ GitHub:
 https://github.com/mohanakumar21
 
 LinkedIn:
-(Add Your LinkedIn)
+https://www.linkedin.com/in/mohanakumar21/
 
 ---
 
-## ⭐ If you like this project
+## ⭐ Support
+
+If you like this project,
+
+⭐ Star this repository
+
+🍴 Fork this repository
+
+📢 Share your feedback
+
+---
