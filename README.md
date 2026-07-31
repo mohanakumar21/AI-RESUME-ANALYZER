@@ -33,11 +33,12 @@ An AI-powered Resume Analyzer that evaluates resumes using ATS (Applicant Tracki
 ## 📸 Screenshots
 
 ### Home Page
-<img width="100%" alt="Home Page" src="screenshots/home.png">
+<img width="100%" alt="Home Page" src="Screenshots/home.png">
 
 ### Resume Analysis
-<img width="100%" alt="Results Page" src="screenshots/results.png">
-
+<img width="100%" alt="Result Page" src="Screenshots/result.png">
+### AI Resume Review
+<img src="Screenshots/ai_feedback.png" alt="AI Feedback" width="100%">
 ---
 
 ## 🛠 Tech Stack
