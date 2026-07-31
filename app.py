@@ -9,6 +9,7 @@ from analyzer.suggestions import generate_suggestions
 from analyzer.job_match import extract_job_skills, calculate_match
 from analyzer.skills import extract_skills, SKILLS_DATABASE
 from analyzer.ai_feedback import generate_ai_feedback
+from analyzer.roadmap import generate_roadmap
 
 
 # -------------------------------
@@ -118,6 +119,7 @@ def upload():
     score, missing_skills = calculate_ats_score(skills)
 
     suggestions = generate_suggestions(score, missing_skills)
+    roadmap = generate_roadmap(missing_skills)
 
     # ---------------- Job Matching ----------------
 
@@ -141,6 +143,7 @@ def upload():
         ats_score=score,
         missing_skills=missing_skills,
         suggestions=suggestions,
+        roadmap=roadmap,
         job_description=job_description,
         job_skills=job_skills,
         match_score=match_score,

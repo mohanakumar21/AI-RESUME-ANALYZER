@@ -136,6 +136,40 @@
 
     </div>
 
+    <div class="card">
+
+    <h2>📈 Resume Improvement Roadmap</h2>
+
+    {% if roadmap %}
+
+        {% for item in roadmap %}
+
+            <div class="roadmap-week">
+
+                <h3>Week {{ item.week }} - {{ item.skill }}</h3>
+
+                <ul>
+
+                    {% for task in item.tasks %}
+
+                        <li>{{ task }}</li>
+
+                    {% endfor %}
+
+                </ul>
+
+            </div>
+
+        {% endfor %}
+
+        {% else %}
+
+            <p>No roadmap needed. Excellent Resume!</p>
+
+        {% endif %}
+
+    </div>
+
     <!-- Education -->
 
     <div class="section">

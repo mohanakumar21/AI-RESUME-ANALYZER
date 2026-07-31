@@ -165,3 +165,36 @@ body{
     font-family:Arial, sans-serif;
 
 }
+.roadmap-week{
+
+    background:#1f2937;
+
+    padding:20px;
+
+    margin:20px 0;
+
+    border-left:5px solid #3b82f6;
+
+    border-radius:10px;
+
+}
+
+.roadmap-week h3{
+
+    color:#60a5fa;
+
+    margin-bottom:10px;
+
+}
+
+.roadmap-week ul{
+
+    padding-left:20px;
+
+}
+
+.roadmap-week li{
+
+    margin:8px 0;
+
+}
