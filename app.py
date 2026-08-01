@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_file
 import os
 from pathlib import Path
 import pdfplumber
@@ -10,6 +10,12 @@ from analyzer.job_match import extract_job_skills, calculate_match
 from analyzer.skills import extract_skills, SKILLS_DATABASE
 from analyzer.ai_feedback import generate_ai_feedback
 from analyzer.roadmap import generate_roadmap
+from analyzer.cover_letter import generate_cover_letter
+from analyzer.pdf_generator import generate_pdf
+
+
+
+latest_report ={}
 
 
 # -------------------------------
@@ -123,7 +129,7 @@ def upload():
 
     # ---------------- Job Matching ----------------
 
-    job_skills = extract_skills(job_description)
+    job_skills = extract_job_skills(job_description)  
     match_score, matched_skills, missing_job_skills = calculate_match(
         skills,
         job_skills
@@ -134,6 +140,23 @@ def upload():
         missing_skills,
         match_score
     )    
+    cover_letter = generate_cover_letter(
+       resume_text,
+        job_description,
+        resume_data
+    )
+
+    latest_report["resume_data"] = resume_data
+    latest_report["ats_score"] = score
+    latest_report["skills"] = skills
+    latest_report["missing_skills"] = missing_skills
+    latest_report["suggestions"] = suggestions
+    latest_report["roadmap"] = roadmap
+    latest_report["match_score"] = match_score
+    latest_report["matched_skills"] = matched_skills
+    latest_report["missing_job_skills"] = missing_job_skills
+    latest_report["ai_feedback"] = ai_feedback
+    latest_report["cover_letter"] = cover_letter
 
     return render_template(
         "results.html",
@@ -149,7 +172,36 @@ def upload():
         match_score=match_score,
         matched_skills=matched_skills,
         missing_job_skills=missing_job_skills,
-        ai_feedback=ai_feedback
+        ai_feedback=ai_feedback,
+        cover_letter=cover_letter,
+    )
+
+@app.route("/download")
+def download():
+
+    filename = os.path.join(
+        app.config["UPLOAD_FOLDER"],
+        "Resume_Report.pdf"
+    )
+
+    generate_pdf(
+        filename,
+        latest_report["resume_data"],
+        latest_report["ats_score"],
+        latest_report["skills"],
+        latest_report["missing_skills"],
+        latest_report["suggestions"],
+        latest_report["roadmap"],
+        latest_report["match_score"],
+        latest_report["matched_skills"],
+        latest_report["missing_job_skills"],
+        latest_report["ai_feedback"],
+        latest_report["cover_letter"]
+    )
+
+    return send_file(
+        filename,
+        as_attachment=True
     )
     # -------------------------------
     # Run Application
