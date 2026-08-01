@@ -18,6 +18,32 @@
         <h1>🤖 AI Resume Analyzer</h1>
         <p>Resume Analysis Report</p>
     </div>
+    <button id="themeToggle" class="theme-btn">
+    🌙 Dark Mode
+    </button>
+    <div class="stats-grid">
+
+    <div class="stat-card">
+        <h3>📊 ATS Score</h3>
+        <h1>{{ ats_score }}</h1>
+    </div>
+
+    <div class="stat-card">
+        <h3>🎯 Job Match</h3>
+        <h1>{{ match_score }}%</h1>
+    </div>
+
+    <div class="stat-card">
+        <h3>🛠 Skills</h3>
+        <h1>{{ skills|length }}</h1>
+    </div>
+
+    <div class="stat-card">
+        <h3>❌ Missing</h3>
+        <h1>{{ missing_skills|length }}</h1>
+    </div>
+
+</div>
 
     <!-- ATS Score -->
 
@@ -25,11 +51,9 @@
 
         <h2>📊 ATS Score</h2>
 
-        <div class="score">
-
-            {{ ats_score }}/100
-
-        </div>
+        <h1>
+            <span id="atsCounter">0</span>/100
+        </h1>
 
         <div class="progress">
 
@@ -57,6 +81,24 @@
             <p style="color:red;">🔴 Needs Improvement</p>
 
         {% endif %}
+
+    </div>
+
+    <div class="card">
+
+    <h2>📊 Resume Analytics Dashboard</h2>
+
+    <div class="chart-grid">
+
+        <div class="chart-box">
+            <canvas id="atsChart"></canvas>
+        </div>
+
+        <div class="chart-box">
+            <canvas id="matchChart"></canvas>
+        </div>
+
+    </div>
 
     </div>
 
@@ -196,11 +238,9 @@
 
         <h2>🎯 Job Match Score</h2>
 
-        <div class="score">
-
-            {{ match_score }}%
-
-        </div>
+        <h1>
+            <span id="matchCounter">0</span>%
+        </h1>
 
         <div class="progress">
 
@@ -335,6 +375,183 @@
 
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+
+const atsChart = new Chart(
+    document.getElementById("atsChart"),
+    {
+        type: "doughnut",
+        data: {
+            labels: ["Score", "Remaining"],
+            datasets: [{
+                data: [0, 100],
+                backgroundColor: [
+                    "#22c55e",
+                    "#374151"
+                ]
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            animation: false,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: "white",
+                        font: {
+                            size: 11
+                        }
+                    }
+                },
+                title: {
+                    display: true,
+                    text: "ATS Score",
+                    color: "white"
+                }
+            }
+        }
+    }
+);
+
+let currentATS = 0;
+const finalATS = {{ ats_score }};
+
+const atsAnimation = setInterval(() => {
+
+    if (currentATS >= finalATS) {
+        clearInterval(atsAnimation);
+        return;
+    }
+
+    currentATS++;
+
+    atsChart.data.datasets[0].data = [
+        currentATS,
+        100 - currentATS
+    ];
+
+    atsChart.update();
+
+}, 20);
+
+</script>
+<script>
+
+const matchChart = new Chart(
+    document.getElementById("matchChart"),
+    {
+        type: "doughnut",
+        data: {
+            labels: ["Matched", "Remaining"],
+            datasets: [{
+                data: [0, 100],
+                backgroundColor: [
+                    "#3b82f6",
+                    "#374151"
+                ]
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            animation: false,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: "white",
+                        font: {
+                            size: 11
+                        }
+                    }
+                },
+                title: {
+                    display: true,
+                    text: "Job Match",
+                    color: "white"
+                }
+            }
+        }
+    }
+);
+
+let currentMatch = 0;
+const finalMatch = {{ match_score }};
+
+const matchAnimation = setInterval(() => {
+
+    if (currentMatch >= finalMatch) {
+        clearInterval(matchAnimation);
+        return;
+    }
+
+    currentMatch++;
+
+    matchChart.data.datasets[0].data = [
+        currentMatch,
+        100 - currentMatch
+    ];
+
+    matchChart.update();
+
+}, 20);
+
+</script>
+
+<script>
+
+function animateCounter(id, endValue, duration) {
+
+    const element = document.getElementById(id);
+
+    let current = 0;
+
+    const stepTime = Math.max(20, duration / endValue);
+
+    const timer = setInterval(() => {
+
+        current++;
+
+        element.innerText = current;
+
+        if(current >= endValue){
+
+            clearInterval(timer);
+
+        }
+
+    }, stepTime);
+
+}
+
+animateCounter("atsCounter", {{ ats_score }}, 2000);
+animateCounter("matchCounter", {{ match_score }}, 2000);
+
+</script>
+
+<script>
+
+const button=document.getElementById("themeToggle");
+
+button.onclick=function(){
+
+document.body.classList.toggle("light");
+
+localStorage.setItem(
+"theme",
+document.body.classList.contains("light")
+);
+
+};
+
+if(localStorage.getItem("theme")=="true"){
+
+document.body.classList.add("light");
+
+}
+
+</script>
 </body>
 
 </html>

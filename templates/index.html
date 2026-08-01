@@ -26,9 +26,7 @@
             <p>✅ Recruiter-Friendly Feedback</p>
         </div>
 
-        <form action="/upload"
-      method="POST"
-      enctype="multipart/form-data">
+        <form id="resumeForm" action="/upload" method="POST" enctype="multipart/form-data">
 
     <input
         type="file"
@@ -52,9 +50,29 @@
 
 </form>
 
+
     </div>
 
 </div>
+
+<div id="loadingScreen" class="loading-screen">
+
+    <div class="loader"></div>
+
+    <h2>🤖 AI Resume Analyzer</h2>
+
+    <p>Analyzing your resume...</p>
+
+</div>
+<script>
+
+document.getElementById("resumeForm").addEventListener("submit",function(){
+
+document.getElementById("loadingScreen").style.display="flex";
+
+});
+
+</script>
 
 </body>
 </html>
