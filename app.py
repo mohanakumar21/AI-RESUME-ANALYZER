@@ -12,7 +12,14 @@ from analyzer.ai_feedback import generate_ai_feedback
 from analyzer.roadmap import generate_roadmap
 from analyzer.cover_letter import generate_cover_letter
 from analyzer.pdf_generator import generate_pdf
-
+from database import db
+from models import User, ResumeHistory
+from flask_login import LoginManager
+from werkzeug.security import (generate_password_hash,check_password_hash)
+from flask import redirect
+from flask_login import (LoginManager,login_user,logout_user,login_required,current_user)
+from datetime import datetime
+from flask_login import current_user
 
 
 latest_report ={}
@@ -29,7 +36,20 @@ app = Flask(
     template_folder=str(BASE_DIR / "templates"),
     static_folder=str(BASE_DIR / "static")
 )
+app.config["SECRET_KEY"] = "your_secret_key_here"
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + str(BASE_DIR / "resume.db")
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
+db.init_app(app)
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+with app.app_context():
+    db.create_all()
 UPLOAD_FOLDER = BASE_DIR / "uploads"
 UPLOAD_FOLDER.mkdir(exist_ok=True)
 
@@ -75,7 +95,67 @@ def extract_docx_text(path):
 def home():
     return render_template("index.html")
 
+@app.route("/register", methods=["GET", "POST"])
+def register():
 
+    if request.method == "POST":
+
+        username = request.form["username"]
+
+        email = request.form["email"]
+
+        password = generate_password_hash(
+            request.form["password"]
+        )
+
+        user = User(
+
+            username=username,
+
+            email=email,
+
+            password=password
+
+        )
+
+        db.session.add(user)
+
+        db.session.commit()
+
+        return redirect("/login")
+
+    return render_template("register.html")
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+
+    if request.method == "POST":
+
+        email = request.form["email"]
+        password = request.form["password"]
+
+        user = User.query.filter_by(email=email).first()
+
+        if user is None:
+            return "User not found"
+
+        if check_password_hash(user.password, password):
+            login_user(user)
+            return redirect("/")
+
+        return render_template("login.html",error="Invalid Email or Password")
+
+    return render_template("login.html")
+
+
+
+@app.route("/logout")
+@login_required
+def logout():
+
+    logout_user()
+
+    return redirect("/login")
 # -------------------------------
 # Resume Upload
 # -------------------------------
@@ -145,7 +225,26 @@ def upload():
         job_description,
         resume_data
     )
+    history = ResumeHistory(
 
+    resume_name=file.filename,
+
+    filename="Resume_Report.pdf",
+
+    ats_score=score,
+
+    match_score=match_score,
+
+    created_at=datetime.now(),
+
+    pdf_path="Resume_Report.pdf",
+
+    user_id=current_user.id
+
+    )
+
+    db.session.add(history)
+    db.session.commit()
     latest_report["resume_data"] = resume_data
     latest_report["ats_score"] = score
     latest_report["skills"] = skills
@@ -203,7 +302,23 @@ def download():
         filename,
         as_attachment=True
     )
-    # -------------------------------
+    
+@app.route("/history")
+@login_required
+def history():
+
+    reports = ResumeHistory.query.filter_by(
+        user_id=current_user.id
+    ).order_by(
+        ResumeHistory.created_at.desc()
+    ).all()
+
+    return render_template(
+        "history.html",
+        history=reports
+    )
+        
+        # -------------------------------
     # Run Application
     # -------------------------------
 if __name__ == "__main__":
