@@ -1,123 +1,146 @@
 # 🤖 AI Resume Analyzer
 
-An AI-powered Resume Analyzer that evaluates resumes using ATS (Applicant Tracking System) scoring, skill extraction, job description matching, and AI-generated feedback using Google's Gemini API.
+An AI-powered Resume Analyzer built with **Flask**, **Python**, and **Google Gemini AI** that evaluates resumes using ATS (Applicant Tracking System) scoring, skill extraction, job description matching, AI-generated resume reviews, cover letter generation, and downloadable PDF reports.
 
 ---
 
-## 🚀 Features
+# 🚀 Features
 
-✅ Upload Resume (PDF & DOCX)
+### 📄 Resume Analysis
+- ✅ Upload Resume (PDF & DOCX)
+- ✅ Resume Parsing
+- ✅ ATS Compatibility Score
+- ✅ Resume Preview
+- ✅ Skill Extraction
+- ✅ Missing Skill Detection
+- ✅ AI Resume Suggestions
 
-✅ Resume Parsing
+### 🎯 Job Matching
+- ✅ Job Description Analysis
+- ✅ Job Match Score
+- ✅ Matching Skills
+- ✅ Missing Job Skills
 
-✅ ATS Compatibility Score
+### 🤖 AI Features
+- ✅ AI Resume Review using Google Gemini
+- ✅ AI Cover Letter Generator
+- ✅ Personalized Resume Improvement Roadmap
 
-✅ Resume Skill Extraction
+### 📊 Analytics Dashboard
+- ✅ ATS Score Doughnut Chart
+- ✅ Job Match Doughnut Chart
+- ✅ Animated Score Counters
+- ✅ Interactive Dashboard
 
-✅ Missing Skill Detection
+### 📑 Reports
+- ✅ Download Complete Resume Analysis as PDF
 
-✅ AI Resume Suggestions
-
-✅ Job Description Matching
-
-✅ Job Match Score
-
-✅ Matching & Missing Job Skills
-
-✅ AI Resume Review using Google Gemini
-
-✅ Modern Responsive UI
+### 🎨 User Interface
+- ✅ Responsive Design
+- ✅ Modern Dashboard
+- ✅ Loading Animation
+- ✅ Smooth UI Animations
 
 ---
 
-## 📸 Screenshots
+# 📸 Screenshots
 
-### Home Page
-<img width="100%" alt="Home Page" src="Screenshots/home.png">
+## 🏠 Home Page
 
-### Resume Analysis
-<img width="100%" alt="Result Page" src="Screenshots/result.png">
-### AI Resume Review
-<img src="Screenshots/ai_feedback.png" alt="AI Feedback" width="100%">
+<img width="100%" src="Screenshots/home.png">
+
 ---
 
-## 🛠 Tech Stack
+## 📊 Resume Analysis
 
-### Frontend
+<img width="100%" src="Screenshots/result.png">
+
+---
+
+## 🤖 AI Resume Review
+
+<img width="100%" src="Screenshots/ai_feedback.png">
+
+---
+
+## 📈 Analytics Dashboard
+
+<img width="100%" src="Screenshots/dashboard.png">
+
+---
+
+## 📄 PDF Report
+
+<img width="100%" src="Screenshots/pdf_report.png">
+
+---
+
+# 🛠 Tech Stack
+
+## Frontend
 - HTML5
 - CSS3
 - JavaScript
+- Chart.js
 
-### Backend
+## Backend
 - Python
 - Flask
 
-### AI
+## Artificial Intelligence
 - Google Gemini API
 - Prompt Engineering
 
-### Resume Processing
+## Resume Processing
 - pdfplumber
 - python-docx
 - Regular Expressions (Regex)
 
-### Version Control
+## PDF Generation
+- ReportLab
+
+## Version Control
 - Git
 - GitHub
 
 ---
 
-## 📂 Project Structure
+# 📂 Project Structure
 
+```
 AI-RESUME-ANALYZER
-
+│
 ├── analyzer/
-
-│ ├── parser.py
-
-│ ├── ats.py
-
-│ ├── skills.py
-
-│ ├── suggestions.py
-
-│ ├── job_match.py
-
-│ └── ai_feedback.py
-
+│   ├── parser.py
+│   ├── ats.py
+│   ├── skills.py
+│   ├── suggestions.py
+│   ├── job_match.py
+│   ├── ai_feedback.py
+│   ├── roadmap.py
+│   ├── cover_letter.py
+│   └── pdf_generator.py
 │
-
 ├── static/
-
-│ └── css/
-
-│ ├── style.css
-
-│ └── results.css
-
+│   ├── css/
+│   │   ├── style.css
+│   │   └── results.css
 │
-
 ├── templates/
-
-│ ├── index.html
-
-│ └── results.html
-
+│   ├── index.html
+│   └── results.html
 │
-
 ├── uploads/
-
 ├── app.py
-
 ├── requirements.txt
-
 └── README.md
+```
 
 ---
 
-## ⚙ Installation
+# ⚙ Installation
 
-### Clone Repository
+## Clone Repository
 
 ```bash
 git clone https://github.com/mohanakumar21/AI-RESUME-ANALYZER.git
@@ -127,49 +150,59 @@ git clone https://github.com/mohanakumar21/AI-RESUME-ANALYZER.git
 cd AI-RESUME-ANALYZER
 ```
 
-### Create Virtual Environment
+---
+
+## Create Virtual Environment
 
 ```bash
 python -m venv venv
 ```
 
-### Activate Environment
+---
 
-Windows
+## Activate Environment
+
+### Windows
 
 ```bash
 venv\Scripts\activate
 ```
 
-Linux / Mac
+### Linux / macOS
 
 ```bash
 source venv/bin/activate
 ```
 
-### Install Requirements
+---
+
+## Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### Configure Gemini API
+---
 
-Create an environment variable named
+## Configure Gemini API
+
+Create an environment variable:
 
 ```
 GEMINI_API_KEY
 ```
 
-and assign your Google Gemini API key.
+Add your Google Gemini API Key.
 
-### Run the Application
+---
+
+## Run the Application
 
 ```bash
 python app.py
 ```
 
-Open
+Open your browser and visit:
 
 ```
 http://127.0.0.1:5000
@@ -177,73 +210,89 @@ http://127.0.0.1:5000
 
 ---
 
-## 📊 Current Capabilities
+# 📊 Current Capabilities
 
 - Resume Parsing
 - ATS Score Calculation
 - Skill Extraction
 - Missing Skill Detection
-- Resume Suggestions
-- Job Description Analysis
-- Job Match Percentage
+- AI Resume Suggestions
+- Job Description Matching
 - AI Resume Review
+- AI Cover Letter Generation
+- Resume Improvement Roadmap
+- Interactive Analytics Dashboard
+- Download PDF Report
 
 ---
 
-## 🎯 Future Improvements
+# 🚀 Future Improvements
 
-- Resume Ranking
-- Download Analysis Report (PDF)
-- AI Resume Rewrite
-- Resume Comparison
-- Multiple Resume Analysis
-- Dashboard with Analytics
-- User Login System
+- User Authentication
 - Resume History
 - Resume Templates
-- Deployment on Render
+- Resume Comparison
+- Resume Ranking
+- AI Resume Rewrite
+- Multi-Resume Analysis
+- Cloud Deployment (Render/Railway)
 
 ---
 
-## 💡 Learning Outcomes
+# 📚 Learning Outcomes
 
-Through this project I learned:
+This project helped me learn:
 
 - Flask Web Development
-- REST-based Application Design
+- Python Backend Development
 - Resume Parsing
-- Regular Expressions
-- Prompt Engineering
+- ATS Scoring Logic
 - Google Gemini API Integration
-- HTML & CSS UI Design
+- Prompt Engineering
+- PDF Report Generation
+- Interactive Dashboard Development
+- HTML, CSS & JavaScript
+- Chart.js
 - Git & GitHub Workflow
 
 ---
 
-## 👨‍💻 Author
+# 👨‍💻 Author
 
 **Mohanakumar S**
 
-B.Tech Electronics and Computer Engineering
+B.Tech – Electronics and Computer Engineering
 
 VIT Chennai
 
-GitHub:
+### GitHub
+
 https://github.com/mohanakumar21
 
-LinkedIn:
+### LinkedIn
+
 https://www.linkedin.com/in/mohanakumar21/
 
 ---
 
-## ⭐ Support
+# ⭐ Support
 
-If you like this project,
+If you found this project useful:
 
 ⭐ Star this repository
 
 🍴 Fork this repository
 
-📢 Share your feedback
+💬 Share your feedback
 
 ---
+
+## 📌 Project Status
+
+**Version:** v1.5
+
+**Status:** Active Development
+
+**Completed:** Milestones 1–15 ✅
+
+**Next:** User Authentication & Resume History (Milestone 16)
