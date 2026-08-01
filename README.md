@@ -295,4 +295,16 @@ If you found this project useful:
 
 **Completed:** Milestones 1–15 ✅
 
-**Next:** User Authentication & Resume History (Milestone 16)
+## 🚀 Milestone 16 - User Authentication & Resume History
+
+### New Features
+
+- 👤 User Registration
+- 🔐 Secure Login
+- 🔒 Password Hashing
+- 🚪 Logout Functionality
+- 📂 Resume History Database
+- 🗄️ SQLite Integration
+- 👥 Multi-user Support
+
+**Next:** (Milestone 17)
