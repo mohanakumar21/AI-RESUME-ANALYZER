@@ -285,7 +285,7 @@ def upload():
         match_score=match_score,
         matched_skills=matched_skills,
         missing_job_skills=missing_job_skills,
-        ai_feedback=ai_feedback,
+        ai_feedback = ai_feedback.replace(". ", ".\n\n"),
         cover_letter=cover_letter,
     )
 
