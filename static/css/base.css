@@ -1,0 +1,364 @@
+/* ======================================================
+   AI CAREER ASSISTANT PLATFORM
+   BASE.CSS
+   Common styles used throughout the application
+====================================================== */
+
+/* ================= RESET ================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+/* ================= BODY ================= */
+
+body{
+    background:#0f172a;
+    color:#ffffff;
+    min-height:100vh;
+}
+
+/* ================= CONTAINER ================= */
+
+.container{
+    width:92%;
+    max-width:1400px;
+    margin:auto;
+    padding:30px 0;
+}
+
+/* ================= HEADINGS ================= */
+
+h1{
+    font-size:38px;
+    font-weight:700;
+}
+
+h2{
+    font-size:28px;
+    margin-bottom:20px;
+}
+
+h3{
+    font-size:20px;
+}
+
+p{
+    line-height:1.7;
+}
+
+/* ================= LINKS ================= */
+
+a{
+    text-decoration:none;
+    color:white;
+}
+
+/* ================= BUTTON ================= */
+
+button{
+
+    cursor:pointer;
+
+    border:none;
+
+    outline:none;
+
+    transition:.3s;
+
+}
+
+button:hover{
+
+    transform:translateY(-2px);
+
+}
+
+/* ================= COMMON CARD ================= */
+
+.card{
+
+    background:#1f2937;
+
+    border-radius:20px;
+
+    padding:30px;
+
+    margin:30px 0;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.35);
+
+}
+
+/* ================= COMMON SECTION ================= */
+
+.section{
+
+    background:#1f2937;
+
+    padding:30px;
+
+    margin:30px 0;
+
+    border-radius:18px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.3);
+
+}
+
+/* ================= TABLE ================= */
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+table th{
+
+    background:#2563eb;
+
+    color:white;
+
+    padding:14px;
+
+}
+
+table td{
+
+    padding:14px;
+
+    text-align:center;
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar{
+
+    width:92%;
+
+    margin:20px auto;
+
+    padding:18px 35px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    background:#1e293b;
+
+    border-radius:15px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.25);
+
+    position:sticky;
+
+    top:15px;
+
+    z-index:999;
+
+}
+
+.logo{
+
+    font-size:28px;
+
+    font-weight:bold;
+
+}
+
+.navbar ul{
+
+    display:flex;
+
+    list-style:none;
+
+    gap:28px;
+
+}
+
+.navbar ul li a{
+
+    color:white;
+
+    transition:.3s;
+
+}
+
+.navbar ul li a:hover{
+
+    color:#38bdf8;
+
+}
+
+.user{
+
+    color:#22c55e;
+
+    font-weight:bold;
+
+}
+
+/* ================= FLASH MESSAGE ================= */
+
+.flash{
+
+    width:92%;
+
+    margin:20px auto;
+
+    padding:15px 20px;
+
+    border-radius:10px;
+
+    font-weight:bold;
+
+}
+
+.flash.success{
+
+    background:#14532d;
+
+}
+
+.flash.danger{
+
+    background:#991b1b;
+
+}
+
+.flash.warning{
+
+    background:#92400e;
+
+}
+
+.flash.info{
+
+    background:#1e40af;
+
+}
+
+/* ================= COMMON ANIMATION ================= */
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(35px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+.card,
+.section{
+
+    animation:fadeUp .6s ease;
+
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:992px){
+
+.navbar{
+
+    flex-direction:column;
+
+    gap:20px;
+
+}
+
+.navbar ul{
+
+    flex-wrap:wrap;
+
+    justify-content:center;
+
+}
+
+.container{
+
+    width:95%;
+
+}
+
+}
+
+@media(max-width:768px){
+
+h1{
+
+    font-size:30px;
+
+}
+
+h2{
+
+    font-size:24px;
+
+}
+
+.navbar{
+
+    padding:20px;
+
+}
+
+.logo{
+
+    font-size:22px;
+
+}
+
+.navbar ul{
+
+    gap:15px;
+
+}
+
+.navbar ul li a{
+
+    font-size:15px;
+
+}
+
+}
+
+@media(max-width:480px){
+
+.container{
+
+    width:96%;
+
+}
+
+.card,
+.section{
+
+    padding:20px;
+
+}
+
+}

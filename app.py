@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, send_file
+from flask import Flask, render_template, request, send_file,flash,url_for
 import os
 from pathlib import Path
 import pdfplumber
@@ -20,6 +20,7 @@ from flask import redirect
 from flask_login import (LoginManager,login_user,logout_user,login_required,current_user)
 from datetime import datetime
 from flask_login import current_user
+from analyzer.achievements import get_achievements
 
 
 latest_report ={}
@@ -104,6 +105,10 @@ def register():
 
         email = request.form["email"]
 
+        existing_user = User.query.filter_by(email=email).first()
+        if existing_user:
+            return render_template("register.html",error="Email already registered. Please login or use another email.")
+
         password = generate_password_hash(
             request.form["password"]
         )
@@ -136,17 +141,26 @@ def login():
 
         user = User.query.filter_by(email=email).first()
 
+        # User not found
         if user is None:
-            return "User not found"
+            return render_template(
+                "login.html",
+                error="Invalid Email or Password"
+            )
 
+        # Correct password
         if check_password_hash(user.password, password):
             login_user(user)
-            return redirect("/")
+            flash("Login Successful!", "success")
+            return redirect(url_for("dashboard"))
 
-        return render_template("login.html",error="Invalid Email or Password")
+        # Wrong password
+        return render_template(
+            "login.html",
+            error="Invalid Email or Password"
+        )
 
     return render_template("login.html")
-
 
 
 @app.route("/logout")
@@ -317,7 +331,184 @@ def history():
         "history.html",
         history=reports
     )
-        
+
+
+@app.route("/dashboard")
+@login_required
+def dashboard():
+
+    reports = ResumeHistory.query.filter_by(
+        user_id=current_user.id
+    ).all()
+
+    total_reports = len(reports)
+
+    if total_reports > 0:
+
+        average_ats = sum(r.ats_score for r in reports) / total_reports
+
+        highest_ats = max(r.ats_score for r in reports)
+
+        latest = reports[-1].created_at
+
+    else:
+
+        average_ats = 0
+        highest_ats = 0
+        latest = "No Reports"
+    if total_reports > 0:
+        average_match = round(sum(r.match_score for r in reports) / total_reports)
+        latest_resume = reports[-1].resume_name
+
+    else:
+        average_match = 0
+        latest_resume = "No Resume"
+    return render_template(
+        "dashboard.html",
+        reports=reports,
+        total_reports=total_reports,
+        average_ats=round(average_ats),
+        highest_ats=highest_ats,
+        latest=latest,
+        average_match=average_match,
+        latest_resume=latest_resume
+    )
+@app.route("/profile")
+@login_required
+def profile():
+
+    reports = ResumeHistory.query.filter_by(
+        user_id=current_user.id
+    ).all()
+    achievements = get_achievements(reports)
+
+    total_reports = len(reports)
+
+    if total_reports:
+
+        average_ats = round(
+            sum(r.ats_score for r in reports) / total_reports
+        )
+
+        highest_ats = max(r.ats_score for r in reports)
+
+        average_match = round(
+            sum(r.match_score for r in reports) / total_reports
+        )
+
+    else:
+
+        average_ats = 0
+        highest_ats = 0
+        average_match = 0
+
+    return render_template(
+        "profile.html",
+        total_reports=total_reports,
+        average_ats=average_ats,
+        highest_ats=highest_ats,
+        average_match=average_match,
+        achievements=achievements
+    )
+@app.route("/edit_profile", methods=["GET", "POST"])
+@login_required
+def edit_profile():
+
+    if request.method == "POST":
+
+        username = request.form["username"].strip()
+        email = request.form["email"].strip()
+
+        # Validation
+
+        if not username or not email:
+
+            flash("All fields are required.", "danger")
+            return redirect(url_for("edit_profile"))
+
+        # Check duplicate username
+
+        existing_user = User.query.filter(
+            User.username == username,
+            User.id != current_user.id
+        ).first()
+
+        if existing_user:
+
+            flash("Username already exists.", "danger")
+            return redirect(url_for("edit_profile"))
+
+        # Check duplicate email
+
+        existing_email = User.query.filter(
+            User.email == email,
+            User.id != current_user.id
+        ).first()
+
+        if existing_email:
+
+            flash("Email already exists.", "danger")
+            return redirect(url_for("edit_profile"))
+
+        current_user.username = username
+        current_user.email = email
+
+        db.session.commit()
+
+        flash("Profile updated successfully!", "success")
+
+        return redirect(url_for("profile"))
+
+    return render_template("edit_profile.html")
+    
+@app.route("/change_password", methods=["GET", "POST"])
+@login_required
+def change_password():
+
+    if request.method == "POST":
+
+        current_password = request.form["current_password"]
+        new_password = request.form["new_password"]
+        confirm_password = request.form["confirm_password"]
+
+        # Check current password
+
+        if not check_password_hash(
+            current_user.password,
+            current_password
+        ):
+
+            flash("Current password is incorrect.", "danger")
+            return redirect(url_for("change_password"))
+
+        # Check new passwords match
+
+        if new_password != confirm_password:
+
+            flash("New passwords do not match.", "danger")
+            return redirect(url_for("change_password"))
+
+        # Optional: Minimum password length
+
+        if len(new_password) < 8:
+
+            flash(
+                "Password must be at least 8 characters long.",
+                "danger"
+            )
+            return redirect(url_for("change_password"))
+
+        # Save new password
+
+        current_user.password = generate_password_hash(new_password)
+
+        db.session.commit()
+
+        flash("Password updated successfully!", "success")
+
+        return redirect(url_for("profile"))
+
+    return render_template("change_password.html")
         # -------------------------------
     # Run Application
     # -------------------------------

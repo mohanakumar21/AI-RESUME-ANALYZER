@@ -1,310 +1,163 @@
-# 🤖 AI Resume Analyzer
+🚀 AI Career Assistant Platform
 
-An AI-powered Resume Analyzer built with **Flask**, **Python**, and **Google Gemini AI** that evaluates resumes using ATS (Applicant Tracking System) scoring, skill extraction, job description matching, AI-generated resume reviews, cover letter generation, and downloadable PDF reports.
+An AI-powered Career Assistant built with Flask, Google Gemini AI,and SQLite that helps users analyze resumes, improve ATS scores,generate AI-powered career insights, create cover letters, and trackcareer progress through a personalized dashboard.
 
----
 
-# 🚀 Features
 
-### 📄 Resume Analysis
-- ✅ Upload Resume (PDF & DOCX)
-- ✅ Resume Parsing
-- ✅ ATS Compatibility Score
-- ✅ Resume Preview
-- ✅ Skill Extraction
-- ✅ Missing Skill Detection
-- ✅ AI Resume Suggestions
+✨ Features
 
-### 🎯 Job Matching
-- ✅ Job Description Analysis
-- ✅ Job Match Score
-- ✅ Matching Skills
-- ✅ Missing Job Skills
+🔐 Authentication
 
-### 🤖 AI Features
-- ✅ AI Resume Review using Google Gemini
-- ✅ AI Cover Letter Generator
-- ✅ Personalized Resume Improvement Roadmap
+Register
 
-### 📊 Analytics Dashboard
-- ✅ ATS Score Doughnut Chart
-- ✅ Job Match Doughnut Chart
-- ✅ Animated Score Counters
-- ✅ Interactive Dashboard
+Login
 
-### 📑 Reports
-- ✅ Download Complete Resume Analysis as PDF
+Logout
 
-### 🎨 User Interface
-- ✅ Responsive Design
-- ✅ Modern Dashboard
-- ✅ Loading Animation
-- ✅ Smooth UI Animations
+Password Hashing
 
----
+Session Management
 
-# 📸 Screenshots
+📄 Resume Analysis
 
-## 🏠 Home Page
+PDF & DOCX Upload
 
-<img width="100%" src="Screenshots/home.png">
+Resume Parsing
 
----
+ATS Score
 
-## 📊 Resume Analysis
+Resume Preview
 
-<img width="100%" src="Screenshots/result.png">
+Skill Extraction
 
----
+Missing Skills
 
-## 🤖 AI Resume Review
+Job Description Matching
 
-<img width="100%" src="Screenshots/ai_feedback.png">
+🤖 AI Features
 
----
+Google Gemini Resume Feedback
 
-## 📈 Analytics Dashboard
+AI Learning Roadmap
 
-<img width="100%" src="Screenshots/dashboard.png">
+AI Cover Letter Generator
 
----
+📊 Dashboard
 
-## 📄 PDF Report
+ATS Analytics
 
-<img width="100%" src="Screenshots/pdf_report.png">
+Charts
 
----
+Resume History
 
-# 🛠 Tech Stack
+Statistics
 
-## Frontend
-- HTML5
-- CSS3
-- JavaScript
-- Chart.js
+Quick Actions
 
-## Backend
-- Python
-- Flask
+👤 Profile
 
-## Artificial Intelligence
-- Google Gemini API
-- Prompt Engineering
+Edit Profile
 
-## Resume Processing
-- pdfplumber
-- python-docx
-- Regular Expressions (Regex)
+Change Password
 
-## PDF Generation
-- ReportLab
+Achievements
 
-## Version Control
-- Git
-- GitHub
+📑 Reports
 
----
+PDF Report Generation
 
-# 📂 Project Structure
+Download Reports
 
-```
-AI-RESUME-ANALYZER
-│
+🛠 Tech Stack
+
+Python
+
+Flask
+
+Flask-Login
+
+Flask-SQLAlchemy
+
+SQLite
+
+Google Gemini API
+
+HTML/CSS/JavaScript
+
+Chart.js
+
+ReportLab
+
+pdfplumber
+
+python-docx
+
+📂 Project Structure
+
+AI-Career-Assistant-Platform/
 ├── analyzer/
-│   ├── parser.py
-│   ├── ats.py
-│   ├── skills.py
-│   ├── suggestions.py
-│   ├── job_match.py
-│   ├── ai_feedback.py
-│   ├── roadmap.py
-│   ├── cover_letter.py
-│   └── pdf_generator.py
-│
 ├── static/
 │   ├── css/
-│   │   ├── style.css
-│   │   └── results.css
-│
+│   ├── js/
+│   └── images/
 ├── templates/
-│   ├── index.html
-│   └── results.html
-│
 ├── uploads/
 ├── app.py
+├── models.py
+├── database.py
 ├── requirements.txt
 └── README.md
-```
 
----
+🚀 Installation
 
-# ⚙ Installation
-
-## Clone Repository
-
-```bash
 git clone https://github.com/mohanakumar21/AI-RESUME-ANALYZER.git
-```
-
-```bash
 cd AI-RESUME-ANALYZER
-```
-
----
-
-## Create Virtual Environment
-
-```bash
 python -m venv venv
-```
 
----
+Windows:
 
-## Activate Environment
-
-### Windows
-
-```bash
 venv\Scripts\activate
-```
 
-### Linux / macOS
+Install:
 
-```bash
-source venv/bin/activate
-```
-
----
-
-## Install Dependencies
-
-```bash
 pip install -r requirements.txt
-```
 
----
+Run:
 
-## Configure Gemini API
-
-Create an environment variable:
-
-```
-GEMINI_API_KEY
-```
-
-Add your Google Gemini API Key.
-
----
-
-## Run the Application
-
-```bash
 python app.py
-```
 
-Open your browser and visit:
+Open:
 
-```
 http://127.0.0.1:5000
-```
 
----
+🗺️ Roadmap
 
-# 📊 Current Capabilities
+AI Career Coach
 
-- Resume Parsing
-- ATS Score Calculation
-- Skill Extraction
-- Missing Skill Detection
-- AI Resume Suggestions
-- Job Description Matching
-- AI Resume Review
-- AI Cover Letter Generation
-- Resume Improvement Roadmap
-- Interactive Analytics Dashboard
-- Download PDF Report
+Resume Comparison
 
----
+Interview Prediction
 
-# 🚀 Future Improvements
+Advanced Analytics
 
-- User Authentication
-- Resume History
-- Resume Templates
-- Resume Comparison
-- Resume Ranking
-- AI Resume Rewrite
-- Multi-Resume Analysis
-- Cloud Deployment (Render/Railway)
+PostgreSQL
 
----
+Render Deployment
 
-# 📚 Learning Outcomes
+👨‍💻 Author
 
-This project helped me learn:
+Mohanakumar S
 
-- Flask Web Development
-- Python Backend Development
-- Resume Parsing
-- ATS Scoring Logic
-- Google Gemini API Integration
-- Prompt Engineering
-- PDF Report Generation
-- Interactive Dashboard Development
-- HTML, CSS & JavaScript
-- Chart.js
-- Git & GitHub Workflow
-
----
-
-# 👨‍💻 Author
-
-**Mohanakumar S**
-
-B.Tech – Electronics and Computer Engineering
+B.Tech -- Electronics and Computer Engineering
 
 VIT Chennai
 
-### GitHub
+GitHub: https://github.com/mohanakumar21
 
-https://github.com/mohanakumar21
+LinkedIn: https://www.linkedin.com/in/mohanakumar21/
 
-### LinkedIn
+⭐ Support
 
-https://www.linkedin.com/in/mohanakumar21/
+Star ⭐ the repository if you found it useful.
 
----
-
-# ⭐ Support
-
-If you found this project useful:
-
-⭐ Star this repository
-
-🍴 Fork this repository
-
-💬 Share your feedback
-
----
-
-## 📌 Project Status
-
-**Version:** v1.5
-
-**Status:** Active Development
-
-**Completed:** Milestones 1–15 ✅
-
-## 🚀 Milestone 16 - User Authentication & Resume History
-
-### New Features
-
-- 👤 User Registration
-- 🔐 Secure Login
-- 🔒 Password Hashing
-- 🚪 Logout Functionality
-- 📂 Resume History Database
-- 🗄️ SQLite Integration
-- 👥 Multi-user Support
-
-**Next:** (Milestone 17)
+Version: 2.0 (Work in Progress)

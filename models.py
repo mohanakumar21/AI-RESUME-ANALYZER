@@ -1,5 +1,6 @@
 from database import db
 from flask_login import UserMixin
+from datetime import datetime
 
 
 
@@ -11,6 +12,10 @@ class User(UserMixin, db.Model):
         db.String(100),
         unique=True,
         nullable=False
+    )
+    joined_date = db.Column(
+    db.DateTime,
+    default=datetime.utcnow
     )
 
     email = db.Column(

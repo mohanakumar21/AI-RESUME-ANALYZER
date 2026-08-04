@@ -14,10 +14,67 @@
 
 <div class="container">
 
-    <div class="title">
-        <h1>🤖 AI Resume Analyzer</h1>
-        <p>Resume Analysis Report</p>
+<!-- ================= HERO BANNER ================= -->
+
+<section class="hero-banner">
+
+    <div class="hero-content">
+
+        <div class="hero-left">
+
+            <span class="hero-badge">
+                🎉 Analysis Complete
+            </span>
+
+            <h1>
+                Resume Analysis Report
+            </h1>
+
+            <p>
+                Your resume has been successfully analyzed.
+                Review your ATS score, job match,
+                AI suggestions and improvement roadmap below.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="#report"
+                   class="hero-btn primary-btn">
+
+                    📊 View Report
+
+                </a>
+
+                <a href="/"
+                   class="hero-btn secondary-btn">
+
+                    📄 Analyze Another Resume
+
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="hero-right">
+
+            <div class="hero-score">
+                <div id="report">
+
+                <span>ATS Score</span>
+
+                <h2>{{ ats_score }}</h2>
+
+                <small>/100</small>
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
+
+</section>
     <button id="themeToggle" class="theme-btn">
     🌙 Dark Mode
     </button>
@@ -63,6 +120,48 @@
             </div>
 
         </div>
+        <div class="score-message">
+
+    {% if ats_score >= 90 %}
+
+        <h3>🏆 Outstanding Resume</h3>
+
+        <p>
+            Your resume is highly optimized for ATS
+            and recruiter screening.
+        </p>
+
+    {% elif ats_score >= 70 %}
+
+        <h3>🚀 Strong Resume</h3>
+
+        <p>
+            Your resume performs well.
+            A few improvements can further increase
+            interview chances.
+        </p>
+
+    {% elif ats_score >= 50 %}
+
+        <h3>📈 Average Resume</h3>
+
+        <p>
+            Your resume needs some optimization.
+            Focus on missing skills and keywords.
+        </p>
+
+    {% else %}
+
+        <h3>⚠ Needs Improvement</h3>
+
+        <p>
+            Significant improvements are recommended
+            before applying.
+        </p>
+
+    {% endif %}
+
+</div>
 
         {% if ats_score >= 90 %}
 

@@ -1,0 +1,254 @@
+{% extends "base.html" %}
+
+{% block title %}
+Profile
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/profile.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="profile-container">
+
+    <!-- ================= PROFILE HEADER ================= -->
+
+    <div class="profile-card">
+
+        <div class="profile-cover"></div>
+
+        <div class="profile-avatar">
+
+            {{ current_user.username[0]|upper }}
+
+        </div>
+
+        <h1>{{ current_user.username }}</h1>
+
+        <p class="profile-role">
+
+            AI Career Assistant Platform User
+
+        </p>
+
+        <div class="profile-status">
+
+            <span class="status-badge">
+
+                🟢 Active Member
+
+            </span>
+
+        </div>
+
+        <div class="profile-meta">
+
+            <div class="meta-card">
+
+                <h4>📅 Member Since</h4>
+
+                <p>{{ current_user.joined_date.strftime('%d %b %Y') }}</p>
+
+            </div>
+
+            <div class="meta-card">
+
+                <h4>📧 Email</h4>
+
+                <p>{{ current_user.email }}</p>
+
+            </div>
+
+            <div class="meta-card">
+
+                <h4>📄 Reports</h4>
+
+                <p>{{ total_reports }}</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================= PERFORMANCE ================= -->
+
+    <section class="profile-section">
+
+        <h2 class="section-title">
+
+            📊 Performance
+
+        </h2>
+
+        <div class="stats-grid">
+
+            <div class="stat-card">
+
+                <h3>Total Analyses</h3>
+
+                <h1>{{ total_reports }}</h1>
+
+            </div>
+
+            <div class="stat-card">
+
+                <h3>Average ATS</h3>
+
+                <h1>{{ average_ats }}%</h1>
+
+            </div>
+
+            <div class="stat-card">
+
+                <h3>Highest ATS</h3>
+
+                <h1>{{ highest_ats }}%</h1>
+
+            </div>
+
+            <div class="stat-card">
+
+                <h3>Average Match</h3>
+
+                <h1>{{ average_match }}%</h1>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= ACHIEVEMENTS ================= -->
+
+    <section class="profile-section">
+
+        <h2 class="section-title">
+
+            🏆 Achievements
+
+        </h2>
+
+        <div class="achievement-grid">
+
+            {% for badge in achievements %}
+
+            <div class="achievement-box">
+
+                <div class="achievement-icon">
+
+                    {{ badge.icon }}
+
+                </div>
+
+                <h3>
+
+                    {{ badge.title }}
+
+                </h3>
+
+                <p>
+
+                    {{ badge.description }}
+
+                </p>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= ACCOUNT ================= -->
+
+    <section class="profile-section">
+
+        <h2 class="section-title">
+
+            👤 Account Information
+
+        </h2>
+
+        <div class="account-grid">
+
+            <div class="account-item">
+
+                <span>Username</span>
+
+                <h3>{{ current_user.username }}</h3>
+
+            </div>
+
+            <div class="account-item">
+
+                <span>Email</span>
+
+                <h3>{{ current_user.email }}</h3>
+
+            </div>
+
+            <div class="account-item">
+
+                <span>Member Since</span>
+
+                <h3>{{ current_user.joined_date.strftime('%d %b %Y') }}</h3>
+
+            </div>
+
+            <div class="account-item">
+
+                <span>Total Reports</span>
+
+                <h3>{{ total_reports }}</h3>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= SETTINGS ================= -->
+
+    <section class="profile-section">
+
+        <h2 class="section-title">
+
+            ⚙️ Account Actions
+
+        </h2>
+<div class="action-grid">
+
+    <a href="{{ url_for('edit_profile') }}" class="profile-action">
+        ✏️
+        <span>Edit Profile</span>
+    </a>
+
+    <a href="{{ url_for('change_password') }}" class="profile-action">
+        🔒
+        <span>Change Password</span>
+    </a>
+
+    <a href="{{ url_for('logout') }}" class="profile-action logout">
+        🚪
+        <span>Logout</span>
+    </a>
+
+</div>
+
+    </section>
+
+</div>
+
+{% endblock %}

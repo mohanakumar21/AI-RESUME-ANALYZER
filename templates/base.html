@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% block title %}
+        AI Career Assistant
+        {% endblock %}
+    </title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/base.css') }}">
+
+    {% block head %}{% endblock %}
+
+</head>
+
+<body>
+
+{% if current_user.is_authenticated %}
+
+<nav class="navbar">
+
+    <div class="logo">
+        🤖 AI Career Assistant Platform
+    </div>
+
+    <ul>
+
+        <li><a href="/dashboard">🏠 Dashboard</a></li>
+
+        <li><a href="/">📄 Analyze</a></li>
+
+        <li><a href="/history">📂 History</a></li>
+
+        <li><a href="/profile">👤 Profile</a></li>
+
+        <li><a href="/logout">🚪 Logout</a></li>
+
+    </ul>
+
+    <div class="user">
+
+        👤 {{ current_user.username }}
+
+    </div>
+
+</nav>
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="flash {{ category }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+{% endif %}
+
+{% block content %}
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}
+
+</body>
+
+</html>

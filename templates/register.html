@@ -6,7 +6,7 @@
     <title>Register</title>
 
     <link rel="stylesheet"
-          href="{{ url_for('static', filename='css/style.css') }}">
+          href="{{ url_for('static', filename='css/auth.css') }}">
 
 </head>
 
@@ -17,6 +17,12 @@
     <div class="card">
 
         <h1>📝 Register</h1>
+
+        {% if error %}
+<p style="color:red; font-weight:bold;">
+    {{ error }}
+</p>
+{% endif %}
 
         <form method="POST">
 

@@ -1,0 +1,259 @@
+{% extends "base.html" %}
+
+
+
+{% block head %}
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/dashboard.css') }}">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+
+    <!-- Welcome Section -->
+
+    <section class="welcome-section">
+
+        <div class="welcome-card">
+
+            <div class="welcome-text">
+
+                <h1>
+                    👋 Welcome back,
+                    {{ current_user.username }}
+                </h1>
+
+                <p>
+                    Monitor your ATS performance, resume history,
+                    and career progress from one place.
+                </p>
+
+            </div>
+
+            <div class="welcome-icon">
+
+                🚀
+
+            </div>
+
+        </div>
+
+    </section>
+  <section class="stats-section">
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+
+            <span class="stat-icon">📄</span>
+
+            <h3>Total Resumes</h3>
+
+            <h2>{{ total_reports }}</h2>
+
+        </div>
+
+        <div class="stat-card">
+
+            <span class="stat-icon">⭐</span>
+
+            <h3>Average ATS</h3>
+
+            <h2>{{ average_ats }}%</h2>
+
+        </div>
+
+        <div class="stat-card">
+
+            <span class="stat-icon">🏆</span>
+
+            <h3>Highest ATS</h3>
+
+            <h2>{{ highest_ats }}%</h2>
+
+        </div>
+
+        <div class="stat-card">
+
+            <span class="stat-icon">🎯</span>
+
+            <h3>Average Match</h3>
+
+            <h2>{{ average_match }}%</h2>
+
+        </div>
+
+        <div class="stat-card">
+
+            <span class="stat-icon">🕒</span>
+
+            <h3>Last Analysis</h3>
+
+            <h4>{{ latest }}</h4>
+
+        </div>
+
+        <div class="stat-card">
+
+            <span class="stat-icon">📁</span>
+
+            <h3>Latest Resume</h3>
+
+            <h4>{{ latest_resume }}</h4>
+
+        </div>
+
+        </div>
+
+    </section>
+
+    <div class="card">
+
+        <h2>📈 ATS Progress</h2>
+
+        <div class="chart-card">
+
+            <h2>📈 ATS Score Trend</h2>
+
+            <canvas id="atsHistoryChart"></canvas>
+
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <div class="history-card">
+
+    <h2>📂 Recent Resume History</h2>
+
+    <table class="history-table">
+
+        <tr>
+
+            <th>Resume</th>
+
+            <th>ATS</th>
+
+            <th>Match</th>
+
+            <th>Date</th>
+
+        </tr>
+
+        {% for report in reports %}
+
+        <tr>
+
+            <td>{{ report.resume_name }}</td>
+
+            <td>{{ report.ats_score }}%</td>
+
+            <td>{{ report.match_score }}%</td>
+
+            <td>{{ report.created_at.strftime('%d %b %Y %I:%M %p') }}</td>
+
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+</div>
+
+    </div>
+
+    <br>
+
+</div>
+<div class="quick-actions">
+
+    <h2>⚡ Quick Actions</h2>
+
+    <div class="action-grid">
+
+        <a href="/" class="action-card">
+
+            📄
+
+            <h3>Analyze Resume</h3>
+
+        </a>
+
+        <a href="/history" class="action-card">
+
+            📂
+
+            <h3>Resume History</h3>
+
+        </a>
+
+        <a href="/profile" class="action-card">
+
+            👤
+
+            <h3>My Profile</h3>
+
+        </a>
+
+        <a href="/logout" class="action-card">
+
+            🚪
+
+            <h3>Logout</h3>
+
+        </a>
+
+    </div>
+
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+
+const labels = [
+{% for report in reports %}
+"{{ report.resume_name }}",
+{% endfor %}
+];
+
+const atsScores = [
+{% for report in reports %}
+{{ report.ats_score }},
+{% endfor %}
+];
+
+new Chart(
+document.getElementById("atsHistoryChart"),
+{
+    type:"line",
+
+    data:{
+        labels:labels,
+
+        datasets:[{
+            label:"ATS Score",
+            data:atsScores,
+            borderColor:"#22c55e",
+            backgroundColor:"rgba(34,197,94,0.2)",
+            fill:true,
+            tension:0.3
+        }]
+    },
+
+    options:{
+        responsive:true
+    }
+
+});
+
+</script>   
+{% endblock %}
