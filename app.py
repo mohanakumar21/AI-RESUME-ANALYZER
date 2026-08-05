@@ -110,6 +110,12 @@ def home():
         return redirect(url_for("dashboard"))
     return redirect(url_for("register"))
 
+@app.route("/analyze")
+@login_required
+def analyze():
+    return render_template("index.html")
+
+    
 @app.route("/register", methods=["GET", "POST"])
 def register():
 
