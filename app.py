@@ -115,7 +115,7 @@ def home():
 def analyze():
     return render_template("index.html")
 
-    
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
 
@@ -438,7 +438,7 @@ def dashboard():
 
         average_ats = 0
         highest_ats = 0
-        latest = "No Reports"
+        latest = None
     if total_reports > 0:
         average_match = round(sum(r.match_score for r in reports) / total_reports)
         latest_resume = reports[-1].resume_name
