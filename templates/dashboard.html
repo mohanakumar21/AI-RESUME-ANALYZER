@@ -95,10 +95,19 @@ Dashboard
 
             <h3>Last Analysis</h3>
 
-            <h4>{{ latest.strftime('%d %b %Y') }}
+           {% if latest %}
+
+            <h4>
+            {{ latest.strftime('%d %b %Y') }}
             <br>
-            <small>{{ latest.strftime('%I:%M %p') }}</small>
+                <small>{{ latest.strftime('%I:%M %p') }}</small>
             </h4>
+
+            {% else %}
+
+            <h4>No Reports Yet</h4>
+
+            {% endif %}
 
         </div>
 

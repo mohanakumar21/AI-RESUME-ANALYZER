@@ -1,163 +1,368 @@
-🚀 AI Career Assistant Platform
+# 🤖 AI Resume Analyzer
 
-An AI-powered Career Assistant built with Flask, Google Gemini AI,and SQLite that helps users analyze resumes, improve ATS scores,generate AI-powered career insights, create cover letters, and trackcareer progress through a personalized dashboard.
+<div align="center">
 
+![Python](https://img.shields.io/badge/Python-3.12-blue?logo=python)
+![Flask](https://img.shields.io/badge/Flask-3.1-black?logo=flask)
+![SQLite](https://img.shields.io/badge/Database-SQLite-blue)
+![Google Gemini](https://img.shields.io/badge/AI-Google%20Gemini-orange)
+![Render](https://img.shields.io/badge/Deployment-Render-purple)
+![License](https://img.shields.io/badge/License-MIT-green)
 
+### 🚀 AI-powered Resume Analysis Platform with ATS Scoring, Job Matching & Career Recommendations
 
-✨ Features
+</div>
 
-🔐 Authentication
+---
 
-Register
+# 📌 Overview
 
-Login
+AI Resume Analyzer is a full-stack web application that helps job seekers improve their resumes using Artificial Intelligence.
 
-Logout
+The platform analyzes uploaded resumes, calculates an ATS score, identifies missing skills, compares resumes against job descriptions, generates AI-powered feedback, creates personalized cover letters, and provides career improvement suggestions.
 
-Password Hashing
+This project was built using **Flask**, **SQLite**, and **Google Gemini AI** and is deployed on **Render**.
 
-Session Management
+---
 
-📄 Resume Analysis
+# 🌐 Live Demo
 
-PDF & DOCX Upload
+🔗 **Live Website**
 
-Resume Parsing
+https://ai-resume-analyzer-890p.onrender.com
 
-ATS Score
+---
 
-Resume Preview
+# ✨ Features
 
-Skill Extraction
+## 🔐 User Authentication
 
-Missing Skills
+- User Registration
+- Secure Login
+- Logout
+- Change Password
+- Edit Profile
 
-Job Description Matching
+---
 
-🤖 AI Features
+## 📄 Resume Analysis
 
-Google Gemini Resume Feedback
+- Upload Resume (PDF/DOCX)
+- Resume Parsing
+- ATS Score Calculation
+- Skill Extraction
+- Missing Skill Detection
 
-AI Learning Roadmap
+---
 
-AI Cover Letter Generator
+## 🎯 Job Matching
 
-📊 Dashboard
+- Paste Job Description
+- AI Job Matching
+- Match Score
+- Missing Job Skills
+- Matched Skills
 
-ATS Analytics
+---
 
-Charts
+## 🤖 AI Features
 
-Resume History
+Powered by Google Gemini AI
 
-Statistics
+- AI Resume Review
+- Resume Improvement Suggestions
+- Career Roadmap
+- AI Generated Cover Letter
 
-Quick Actions
+---
 
-👤 Profile
+## 📊 Dashboard
 
-Edit Profile
+- Total Reports
+- Last Analysis
+- Resume History
+- User Profile
 
-Change Password
+---
 
-Achievements
+## 📥 Report Features
 
-📑 Reports
+- Download PDF Report
+- Email Resume Report
+- Resume History
 
-PDF Report Generation
+---
 
-Download Reports
+# 🖥️ Screenshots
 
-🛠 Tech Stack
+## Dashboard
 
-Python
+<img src="Screenshots/dashboard.png" width="900">
 
-Flask
+---
 
-Flask-Login
+## Resume Upload
 
-Flask-SQLAlchemy
+<img src="Screenshots/upload.png" width="900">
 
-SQLite
+---
 
-Google Gemini API
+## ATS Analysis
 
-HTML/CSS/JavaScript
+<img src="Screenshots/result.png" width="900">
 
-Chart.js
+---
 
-ReportLab
+## AI Resume Review
 
-pdfplumber
+<img src="Screenshots/ai_review.png" width="900">
 
-python-docx
+---
 
-📂 Project Structure
+## Resume History
 
-AI-Career-Assistant-Platform/
+<img src="Screenshots/history.png" width="900">
+
+---
+
+## Profile
+
+<img src="Screenshots/profile.png" width="900">
+
+---
+
+# ⚙️ Tech Stack
+
+## Frontend
+
+- HTML5
+- CSS3
+- JavaScript
+
+---
+
+## Backend
+
+- Python
+- Flask
+- Flask Login
+- Flask SQLAlchemy
+- Flask Mail
+
+---
+
+## Artificial Intelligence
+
+- Google Gemini API
+
+---
+
+## Database
+
+- SQLite
+
+---
+
+## Deployment
+
+- Render
+
+---
+
+## Version Control
+
+- Git
+- GitHub
+
+---
+
+# 📂 Project Structure
+
+```
+AI-RESUME-ANALYZER
+│
 ├── analyzer/
+│
 ├── static/
 │   ├── css/
-│   ├── js/
 │   └── images/
+│
 ├── templates/
+│
 ├── uploads/
+│
+├── Screenshots/
+│
 ├── app.py
 ├── models.py
 ├── database.py
 ├── requirements.txt
+├── runtime.txt
 └── README.md
+```
 
-🚀 Installation
+---
 
-git clone https://github.com/mohanakumar21/AI-RESUME-ANALYZER.git
+# 🚀 Installation
+
+## Clone Repository
+
+```bash
+git clone https://github.com/YOUR_GITHUB_USERNAME/AI-RESUME-ANALYZER.git
+
 cd AI-RESUME-ANALYZER
+```
+
+---
+
+## Create Virtual Environment
+
+```bash
 python -m venv venv
+```
 
-Windows:
+Windows
 
+```bash
 venv\Scripts\activate
+```
 
-Install:
+Linux / Mac
 
+```bash
+source venv/bin/activate
+```
+
+---
+
+## Install Dependencies
+
+```bash
 pip install -r requirements.txt
+```
 
-Run:
+---
 
+## Run Application
+
+```bash
 python app.py
+```
 
-Open:
+Open
 
+```
 http://127.0.0.1:5000
+```
 
-🗺️ Roadmap
+---
 
-AI Career Coach
+# 📊 Workflow
 
-Resume Comparison
+```
+User
+   │
+   ▼
+Register/Login
+   │
+   ▼
+Dashboard
+   │
+   ▼
+Upload Resume
+   │
+   ▼
+Extract Resume Text
+   │
+   ▼
+ATS Analysis
+   │
+   ▼
+Job Description Matching
+   │
+   ▼
+Google Gemini AI
+   │
+   ▼
+AI Resume Review
+   │
+   ▼
+Career Suggestions
+   │
+   ▼
+Cover Letter Generation
+   │
+   ▼
+Download PDF / Email Report
+```
 
-Interview Prediction
+---
 
-Advanced Analytics
+# 🎯 Future Improvements
 
-PostgreSQL
+- Multiple Resume Templates
+- AI Mock Interview
+- LinkedIn Profile Analyzer
+- Resume Version Comparison
+- Recruiter Dashboard
+- Multi-language Resume Support
+- Dark/Light Theme
+- Resume Keyword Optimization
+- AI Resume Chat Assistant
 
-Render Deployment
+---
 
-👨‍💻 Author
+# 💡 Learning Outcomes
 
-Mohanakumar S
+During this project I learned:
 
-B.Tech -- Electronics and Computer Engineering
+- Flask Web Development
+- Authentication using Flask Login
+- Database Design with SQLAlchemy
+- REST Routing
+- Google Gemini AI Integration
+- Resume Parsing
+- ATS Scoring Logic
+- PDF Report Generation
+- Email Automation
+- Responsive UI Design
+- Git & GitHub
+- Cloud Deployment on Render
+
+---
+
+# 👨‍💻 Author
+
+## Mohanakumar S
+
+B.Tech Electronics and Computer Engineering
 
 VIT Chennai
 
-GitHub: https://github.com/mohanakumar21
+GitHub
 
-LinkedIn: https://www.linkedin.com/in/mohanakumar21/
+https://github.com/mohanakumar21
 
-⭐ Support
+LinkedIn
 
-Star ⭐ the repository if you found it useful.
+https://www.linkedin.com/in/mohanakumar21/
 
-Version: 2.0 (Work in Progress)
+---
+
+# ⭐ If you like this project
+
+Please consider giving this repository a ⭐ on GitHub.
+
+---
+
+# 📜 License
+
+This project is licensed under the MIT License.
+
+---
+
+<div align="center">
+
+### 🚀 Built with ❤️ using Flask + Google Gemini AI
+
+</div>
