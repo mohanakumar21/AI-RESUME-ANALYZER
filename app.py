@@ -106,7 +106,9 @@ def extract_docx_text(path):
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+    if current_user.is_authenticated:
+        return redirect(url_for("dashboard"))
+    return render_template(url_for("register"))
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
