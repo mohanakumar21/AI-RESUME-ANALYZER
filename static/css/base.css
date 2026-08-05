@@ -16,7 +16,7 @@
 /* ================= BODY ================= */
 
 body{
-    background:#0f172a;
+    background:#0B1120;
     color:#ffffff;
     min-height:100vh;
 }
@@ -81,7 +81,7 @@ button:hover{
 
 .card{
 
-    background:#1f2937;
+    background:#1E1B4B;
 
     border-radius:20px;
 
@@ -155,7 +155,7 @@ table td{
 
     align-items:center;
 
-    background:#1e293b;
+    background:#111827;
 
     border-radius:15px;
 

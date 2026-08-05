@@ -15,7 +15,7 @@
 
 .welcome-card{
 
-    background:linear-gradient(135deg,#2563eb,#1e3a8a);
+    background:linear-gradient(135deg,#7C3AED,#5B21B6,#312E81);
 
     border-radius:18px;
 
@@ -79,7 +79,7 @@
 
 .stat-card{
 
-    background:#222b3c;
+    background:#1E1B4B;
 
     border-radius:16px;
 
@@ -131,7 +131,7 @@
 
 .chart-card{
 
-    background:#1f2937;
+    background:#2E1065;
 
     border-radius:18px;
 
@@ -155,7 +155,7 @@
 
 .history-card{
 
-    background:#1f2937;
+    background:#2E1065;
 
     border-radius:18px;
 
@@ -181,7 +181,7 @@
 
 .history-table th{
 
-    background:#2563eb;
+    background:#7C3AED;
 
     padding:15px;
 
@@ -234,7 +234,7 @@
 
 .action-card{
 
-    background:#1f2937;
+    background:#1E1B4B;
 
     color:white;
 
@@ -256,7 +256,7 @@
 
     transform:translateY(-6px);
 
-    background:#2563eb;
+    background:#7C3AED;
 
 }
 

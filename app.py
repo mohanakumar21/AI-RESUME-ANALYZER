@@ -1,4 +1,6 @@
 from flask import Flask, render_template, request, send_file,flash,url_for
+from flask_mail import Mail, Message
+from flask import flash, redirect, url_for
 import os
 from pathlib import Path
 import pdfplumber
@@ -40,6 +42,16 @@ app = Flask(
 app.config["SECRET_KEY"] = "your_secret_key_here"
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + str(BASE_DIR / "resume.db")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+# ---------------- Mail Configuration ----------------
+
+app.config["MAIL_SERVER"] = "smtp.gmail.com"
+app.config["MAIL_PORT"] = 587
+app.config["MAIL_USE_TLS"] = True
+app.config["MAIL_USERNAME"] = "mohanakumar2106@gmail.com"
+app.config["MAIL_PASSWORD"] = "wwqa lmsq lkcx flhx"
+app.config["MAIL_DEFAULT_SENDER"] = "mohanakumar2106@gmail.com"
+
+mail = Mail(app)
 
 db.init_app(app)
 
@@ -182,6 +194,9 @@ def upload():
 
     file = request.files["resume"]
     job_description = request.form.get("job_description", "")
+    print("===== JOB DESCRIPTION =====")
+    print(job_description)
+    print("===========================")
 
 
     if file.filename == "":
@@ -270,6 +285,7 @@ def upload():
     latest_report["missing_job_skills"] = missing_job_skills
     latest_report["ai_feedback"] = ai_feedback
     latest_report["cover_letter"] = cover_letter
+    print("Latest report keys:", latest_report.keys())
 
     return render_template(
         "results.html",
@@ -287,6 +303,7 @@ def upload():
         missing_job_skills=missing_job_skills,
         ai_feedback = ai_feedback.replace(". ", ".\n\n"),
         cover_letter=cover_letter,
+        
     )
 
 @app.route("/download")
@@ -316,6 +333,64 @@ def download():
         filename,
         as_attachment=True
     )
+@app.route("/send-email")
+@login_required
+def send_email():
+
+    if not latest_report:
+        return "Please analyze a resume before sending the email."
+
+    filename = os.path.join(
+        app.config["UPLOAD_FOLDER"],
+        "Resume_Report.pdf"
+    )
+
+    # Always generate the latest PDF
+    generate_pdf(
+        filename,
+        latest_report["resume_data"],
+        latest_report["ats_score"],
+        latest_report["skills"],
+        latest_report["missing_skills"],
+        latest_report["suggestions"],
+        latest_report["roadmap"],
+        latest_report["match_score"],
+        latest_report["matched_skills"],
+        latest_report["missing_job_skills"],
+        latest_report["ai_feedback"],
+        latest_report["cover_letter"]
+    )
+
+    recipient = latest_report["resume_data"].get("email")
+
+    if not recipient or recipient == "Not Found":
+        return "Email address not found in resume."
+
+    msg = Message(
+        subject="Your AI Resume Analysis Report",
+        sender=app.config["MAIL_USERNAME"],
+        recipients=[recipient]
+    )
+
+    msg.body = (
+        "Hello,\n\n"
+        "Please find your AI Resume Analysis Report attached.\n\n"
+        "Thank you for using AI Resume Analyzer."
+    )
+
+    with app.open_resource(filename) as fp:
+        msg.attach(
+            "Resume_Report.pdf",
+            "application/pdf",
+            fp.read()
+        )
+
+    mail.send(msg)
+
+   
+
+    flash("✅ Report emailed successfully!", "success")
+    return redirect(url_for("dashboard"))
     
 @app.route("/history")
 @login_required
@@ -339,7 +414,7 @@ def dashboard():
 
     reports = ResumeHistory.query.filter_by(
         user_id=current_user.id
-    ).all()
+    ).limit(5).all()
 
     total_reports = len(reports)
 
@@ -509,7 +584,10 @@ def change_password():
         return redirect(url_for("profile"))
 
     return render_template("change_password.html")
-        # -------------------------------
+    
+  
+    
+    # -------------------------------
     # Run Application
     # -------------------------------
 if __name__ == "__main__":

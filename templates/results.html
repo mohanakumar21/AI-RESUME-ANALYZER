@@ -464,7 +464,35 @@
             and "UNAVAILABLE" not in ai_feedback
             and "error" not in ai_feedback.lower() %}
 
-            <p>{{ ai_feedback }}</p>
+            <div id="ai-review-content"></div>
+
+            <script>
+
+                const feedback = `{{ ai_feedback|safe }}`;
+
+                const html = feedback
+                .replace(/Strengths:/g,
+                `<div class="ai-section strength">
+                <h3>✅ Strengths</h3><ul>`)
+
+                .replace(/Weaknesses:/g,
+                `</ul></div><div class="ai-section weakness">
+                <h3>⚠️ Weaknesses</h3><ul>`)
+
+                .replace(/Suggestions:/g,
+                `</ul></div><div class="ai-section suggestion">
+                <h3>💡 Suggestions</h3><ul>`)
+
+                .replace(/^- /gm,"<li>")
+                .replace(/(\n)(?=<li>)/g,"")
+                .replace(/<\/li>\n/g,"</li>")
+                .replace(/\n- /g,"<li>")
+                .replace(/\n/g,"")
+                .replace(/(<li>.*?)(?=<li>|<\/ul>|$)/g,"$1</li>");
+
+                document.getElementById("ai-review-content").innerHTML = html + "</ul></div>";
+
+            </script>   
 
             {% else %}
 
@@ -565,6 +593,10 @@
 
                 <button onclick="downloadPDF()" class="copy-btn">
                     ⬇ Download PDF
+                </button>
+
+                <button onclick="sendEmail()" class="copy-btn">
+                    📧 Email Report
                 </button>
 
             </div>
@@ -791,7 +823,12 @@ function copyResume(){
 
 function downloadPDF(){
 
-    window.location.href="/download-pdf";
+    window.location.href="/download";
+
+}
+function sendEmail() {
+
+    window.location.href = "/send-email";
 
 }
 </script>

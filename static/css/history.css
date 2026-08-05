@@ -1,0 +1,48 @@
+.container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.page-header {
+    margin-bottom: 25px;
+}
+
+.page-header h1 {
+    font-size: 2rem;
+    margin-bottom: 8px;
+}
+
+.page-header p {
+    color: #9ca3af;
+}
+
+.history-card {
+    background: #1f2937;
+    border-radius: 12px;
+    padding: 20px;
+    overflow-x: auto;
+}
+
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.history-table th,
+.history-table td {
+    padding: 14px;
+    text-align: left;
+}
+
+.history-table th {
+    background: #111827;
+}
+
+.history-table tr {
+    border-bottom: 1px solid #374151;
+}
+
+.history-table tr:hover {
+    background: rgba(255,255,255,0.05);
+}

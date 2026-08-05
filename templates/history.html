@@ -1,22 +1,25 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %}
 
-<head>
-
-<title>Resume History</title>
-
+{% block head %}
 <link rel="stylesheet"
-href="{{ url_for('static', filename='css/style.css') }}">
+      href="{{ url_for('static', filename='css/history.css') }}">
+{% endblock %}
 
-</head>
+{% block title %}
+Resume History
+{% endblock %}
 
-<body>
+{% block content %}
 
 <div class="container">
 
-<h1>📂 Resume History</h1>
+<div class="page-header">
+    <h1>📂 Resume History</h1>
+    <p>View all your previously analyzed resumes.</p>
+</div>
 
-<table border="1" cellpadding="10">
+<div class="history-card">
+<table class="history-table">
 
 <tr>
 
@@ -40,7 +43,7 @@ href="{{ url_for('static', filename='css/style.css') }}">
 
 <td>{{ item.match_score }}%</td>
 
-<td>{{ item.created_at }}</td>
+<td>{{ item.created_at.strftime('%d %b %Y %I:%M %p') }}</td>
 
 </tr>
 
@@ -50,6 +53,4 @@ href="{{ url_for('static', filename='css/style.css') }}">
 
 </div>
 
-</body>
-
-</html>
+{% endblock %}

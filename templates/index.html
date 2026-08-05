@@ -37,11 +37,28 @@
     <br><br>
 
 
+    <label for="jobRole"><strong>Select a Job Role (Optional)</strong></label>
+
+        <select id="jobRole">
+        <option value="">-- Choose a Job Role --</option>
+        <option value="AI Engineer">AI Engineer</option>
+        <option value="Data Scientist">Data Scientist</option>
+        <option value="Machine Learning Engineer">Machine Learning Engineer</option>
+        <option value="Software Engineer">Software Engineer</option>
+        <option value="Frontend Developer">Frontend Developer</option>
+        <option value="Backend Developer">Backend Developer</option>
+        <option value="Full Stack Developer">Full Stack Developer</option>
+    </select>
+
     <textarea
         name="job_description"
+        id="job_description"
         placeholder="Paste Job Description Here..."
-        rows="8">
+        rows="8"
+        required>
     </textarea>
+
+    <br><br>
     <button type="submit">
         🚀 Analyze My Resume
     </button>
@@ -66,10 +83,37 @@
 </div>
 <script>
 
-document.getElementById("resumeForm").addEventListener("submit",function(){
+const jobDescriptions = {
+    "AI Engineer": `We are looking for an AI Engineer with experience in Python, Machine Learning, Deep Learning, TensorFlow, PyTorch, NLP, SQL, Git, problem-solving, and teamwork.`,
 
-document.getElementById("loadingScreen").style.display="flex";
+    "Data Scientist": `We are looking for a Data Scientist with knowledge of Python, SQL, Statistics, Machine Learning, Data Visualization, Pandas, NumPy, and analytical thinking.`,
 
+    "Machine Learning Engineer": `We are looking for a Machine Learning Engineer with experience in Python, Scikit-learn, TensorFlow, Feature Engineering, Model Deployment, APIs, Git, and cloud platforms.`,
+
+    "Software Engineer": `We are looking for a Software Engineer with strong knowledge of Data Structures, Algorithms, OOP, Python or Java, SQL, Git, problem-solving, and teamwork.`,
+
+    "Frontend Developer": `We are looking for a Frontend Developer skilled in HTML, CSS, JavaScript, React, Responsive Design, Git, and UI/UX principles.`,
+
+    "Backend Developer": `We are looking for a Backend Developer experienced in Python or Java, Flask or Spring Boot, REST APIs, SQL, Git, authentication, and database design.`,
+
+    "Full Stack Developer": `We are looking for a Full Stack Developer with experience in HTML, CSS, JavaScript, React, Flask, SQL, REST APIs, Git, and problem-solving.`
+};
+
+document.getElementById("jobRole").addEventListener("change", function () {const role = this.value;const textarea = document.getElementById("job_description");
+document.getElementById("resumeForm").addEventListener("submit", function (e) {
+
+    e.preventDefault();
+
+    document.getElementById("loadingScreen").style.display = "flex";
+
+    setTimeout(() => {
+        document.getElementById("resumeForm").submit();
+    }, 100);
+
+});
+    if (jobDescriptions[role]) {
+        textarea.value = jobDescriptions[role];
+    }
 });
 
 </script>

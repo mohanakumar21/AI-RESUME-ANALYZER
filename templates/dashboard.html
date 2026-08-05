@@ -95,7 +95,10 @@ Dashboard
 
             <h3>Last Analysis</h3>
 
-            <h4>{{ latest }}</h4>
+            <h4>{{ latest.strftime('%d %b %Y') }}
+            <br>
+            <small>{{ latest.strftime('%I:%M %p') }}</small>
+            </h4>
 
         </div>
 

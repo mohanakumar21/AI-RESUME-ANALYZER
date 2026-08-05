@@ -3,6 +3,7 @@ from reportlab.platypus import (
     Paragraph,
     Spacer
 )
+from datetime import datetime
 
 from reportlab.lib.styles import getSampleStyleSheet
 
@@ -34,6 +35,14 @@ def generate_pdf(
 
     story.append(
         Paragraph("<b>AI Resume Analysis Report</b>", styles["Title"])
+    )
+
+    story.append(Spacer(1,20))
+    story.append(
+    Paragraph(
+        f"<b>Generated on:</b> {datetime.now().strftime('%d %b %Y %I:%M %p')}",
+        styles["BodyText"]
+    )
     )
 
     story.append(Spacer(1,20))
@@ -83,7 +92,10 @@ def generate_pdf(
     )
 
     story.append(
-        Paragraph(", ".join(skills), styles["BodyText"])
+        Paragraph(
+            ", ".join(skills) if skills else "No skills detected.",
+            styles["BodyText"]
+        )
     )
 
     story.append(Spacer(1,15))
@@ -97,7 +109,10 @@ def generate_pdf(
     )
 
     story.append(
-        Paragraph(", ".join(missing_skills), styles["BodyText"])
+        Paragraph(
+              ", ".join(missing_skills) if missing_skills else "No missing skills.",
+            styles["BodyText"]
+        )
     )
 
     story.append(Spacer(1,15))
@@ -148,24 +163,21 @@ def generate_pdf(
     story.append(Spacer(1,15))
 
     story.append(
-        Paragraph("<b>Matching Skills</b>", styles["Heading2"])
+        Paragraph(
+            ", ".join(matched_skills) if matched_skills else "No matching skills found.",
+            styles["BodyText"]
+        )
     )
 
     story.append(
-        Paragraph(", ".join(matched_skills), styles["BodyText"])
+        Paragraph(
+            ", ".join(missing_job_skills) if missing_job_skills else "No missing job skills.",
+            styles["BodyText"]
+        )
     )
 
     story.append(Spacer(1,15))
 
-    story.append(
-        Paragraph("<b>Missing Job Skills</b>", styles["Heading2"])
-    )
-
-    story.append(
-        Paragraph(", ".join(missing_job_skills), styles["BodyText"])
-    )
-
-    story.append(Spacer(1,15))
 
     # -----------------------------
     # AI Review

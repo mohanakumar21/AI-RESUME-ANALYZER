@@ -37,19 +37,28 @@ Resume:
 
 {resume_text}
 
-Give feedback in this format.
+Return the response in plain text only.
+
+Do NOT use Markdown.
+
+Do NOT use **bold**, *, #, or numbered lists.
+
+Use exactly this format:
 
 Strengths:
-- ...
+- Point 1
+- Point 2
+- Point 3
 
 Weaknesses:
-- ...
+- Point 1
+- Point 2
+- Point 3
 
 Suggestions:
-- ...
-- ...
-- ...
-"""
+- Point 1
+- Point 2
+- Point 3 """
 
     try:
 

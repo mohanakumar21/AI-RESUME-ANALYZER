@@ -3,6 +3,10 @@
 {% block title %}
 Edit Profile
 {% endblock %}
+{% block head %}
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/profile.css') }}">
+{% endblock %}
 
 {% block content %}
 
@@ -12,31 +16,31 @@ Edit Profile
 
         <h1>Edit Profile</h1>
 
-        <form method="POST">
+        <form method="POST" class="edit-profile-form">
 
-            <label>Username</label>
-
+        <div class="form-group">
+            <label for="username">Username</label>
             <input
                 type="text"
+                id="username"
                 name="username"
                 value="{{ current_user.username }}"
-                required
-            >
+                required>
+        </div>
 
-            <label>Email</label>
-
+        <div class="form-group">
+            <label for="email">Email</label>
             <input
                 type="email"
-                name="email"
-                value="{{ current_user.email }}"
-                required
-            >
+            id="email"
+            name="email"
+            value="{{ current_user.email }}"
+            required>
+        </div>
 
-            <button type="submit">
-
-                Save Changes
-
-            </button>
+        <button type="submit" class="profile-btn">
+            💾 Save Changes
+        </button>
 
         </form>
 
