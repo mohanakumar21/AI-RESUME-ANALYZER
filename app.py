@@ -47,9 +47,9 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["MAIL_SERVER"] = "smtp.gmail.com"
 app.config["MAIL_PORT"] = 587
 app.config["MAIL_USE_TLS"] = True
-app.config["MAIL_USERNAME"] = "mohanakumar2106@gmail.com"
-app.config["MAIL_PASSWORD"] = "wwqa lmsq lkcx flhx"
-app.config["MAIL_DEFAULT_SENDER"] = "mohanakumar2106@gmail.com"
+app.config["MAIL_USERNAME"] = os.environ.get("MAIL_USERNAME")
+app.config["MAIL_PASSWORD"] = os.environ.get("MAIL_PASSWORD")
+app.config["MAIL_DEFAULT_SENDER"] = os.environ.get("MAIL_USERNAME")
 
 mail = Mail(app)
 
@@ -393,11 +393,12 @@ def send_email():
             fp.read()
         )
 
-    mail.send(msg)
-
-   
-
-    flash("✅ Report emailed successfully!", "success")
+    try:
+        mail.send(msg)
+        flash("✅ Report emailed successfully!", "success")
+    except Exception as e:
+        print("MAIL ERROR:", e)
+        return f"Mail Error: {e}"
     return redirect(url_for("dashboard"))
     
 @app.route("/history")
