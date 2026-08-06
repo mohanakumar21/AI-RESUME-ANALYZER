@@ -203,6 +203,7 @@ def logout():
 # -------------------------------
 
 @app.route("/upload", methods=["POST"])
+@login_required
 def upload():
 
     if "resume" not in request.files:
@@ -270,6 +271,9 @@ def upload():
         job_description,
         resume_data
     )
+    # Safety check
+    if not current_user.is_authenticated:
+        return redirect(url_for("login"))
     history = ResumeHistory(
 
     resume_name=file.filename,
