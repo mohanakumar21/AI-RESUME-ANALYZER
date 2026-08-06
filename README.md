@@ -97,37 +97,37 @@ Powered by Google Gemini AI
 
 ## Dashboard
 
-<img src="Screenshots/dashboard.png" width="900">
+<img src="Screenshots/Dashboard.png" width="900">
 
 ---
 
 ## Resume Upload
 
-<img src="Screenshots/upload.png" width="900">
+<img src="Screenshots/Resume Upload.png" width="900">
 
 ---
 
 ## ATS Analysis
 
-<img src="Screenshots/result.png" width="900">
+<img src="Screenshots/ATS Analysis.png" width="900">
 
 ---
 
 ## AI Resume Review
 
-<img src="Screenshots/ai_review.png" width="900">
+<img src="Screenshots/AI Resume Review.png" width="900">
 
 ---
 
 ## Resume History
 
-<img src="Screenshots/history.png" width="900">
+<img src="Screenshots/Resume History.png" width="900">
 
 ---
 
 ## Profile
 
-<img src="Screenshots/profile.png" width="900">
+<img src="Screenshots/Profile.png" width="900">
 
 ---
 
