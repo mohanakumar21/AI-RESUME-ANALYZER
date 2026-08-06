@@ -125,6 +125,11 @@ def register():
 
         email = request.form["email"]
 
+        existing_username = User.query.filter_by(username=username).first()
+
+        if existing_username:
+            return render_template("register.html",error="Username already taken. Please choose another username.")
+
         existing_user = User.query.filter_by(email=email).first()
         if existing_user:
             return render_template("register.html",error="Email already registered. Please login or use another email.")
@@ -146,6 +151,8 @@ def register():
         db.session.add(user)
 
         db.session.commit()
+        print("✅ User Registered:", user.email)
+        print("Total Users:", User.query.count())
 
         return redirect("/login")
 
@@ -160,6 +167,7 @@ def login():
         password = request.form["password"]
 
         user = User.query.filter_by(email=email).first()
+        print("User Found:", user)
 
         # User not found
         if user is None:
